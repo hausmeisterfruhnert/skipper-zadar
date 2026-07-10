@@ -136,6 +136,7 @@ exports.index = (ctx) => {
   const preview = TOURS.filter(z=>["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok"].includes(z.id));
   const body = `
   <section class="hero">
+    ${ctx.BRAND.images.hero?`<img class="hero-bg" src="${ctx.BRAND.images.hero}" alt="">`:''}
     <div class="container">
       <div>
         <span class="eyebrow">${x.eyebrow}</span>
@@ -238,7 +239,7 @@ exports.touren = (ctx) => {
     return `<div style="margin-top:40px"><h2 style="margin-bottom:18px">${x.g[g]}</h2>
       <div class="grid grid-2">${items.map(tr=>{
         const d=tr[l];
-        return `<div class="tour"><div class="tour-media"><span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span><span class="emoji">${tr.emoji}</span></div>
+        return `<div class="tour"><div class="tour-media"><span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>${tr.media?`<img class="tour-img" src="${tr.media}" alt="" loading="lazy">`:`<span class="emoji">${tr.emoji}</span>`}</div>
           <div class="tour-body"><h3>${d.title}</h3>
           <div class="tour-meta">${tr.hrs?`<span>⏱️ ${tr.hrs} ${t.hours}</span>`:`<span>🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}</span>`}<span>👥 ${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity}</span></div>
           <p>${d.teaser}</p>

@@ -128,7 +128,7 @@ const tourCard = (l, tr) => {
   return `<article class="tour">
     <div class="tour-media">
       <span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>
-      <span class="emoji">${tr.emoji}</span>
+      ${tr.media?`<img class="tour-img" src="${tr.media}" alt="" loading="lazy">`:`<span class="emoji">${tr.emoji}</span>`}
     </div>
     <div class="tour-body">
       <h3>${d.title}</h3>
