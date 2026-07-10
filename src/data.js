@@ -19,6 +19,22 @@ const BRAND = {
   instagram: "https://www.instagram.com/fruhnert_zadar",
   instaHandle: "@fruhnert_zadar",
   domain: "", // z.B. "www.skipper-zadar.com" – wenn gesetzt, wird beim Build eine CNAME-Datei erzeugt (Custom Domain)
+  // Fotos: Dateien in assets/ legen und Pfad eintragen (z.B. "../assets/boot-1.jpg"). Leer = markenfarbenes Panel.
+  images: {
+    boat:     "../assets/boat-main.jpg", // Hauptfoto Boot (Seite „Das Boot")
+    boatDeck: "../assets/boat-2.jpg",    // zweites Boot-Foto – Seite „Das Boot"
+    owner:    "../assets/about-neutral.jpg", // Über uns: neutrales Zadar-Motiv (Platzhalter, bis echtes Foto von Andreas da ist)
+    night:    "", // Zadar-Hafen bei Nacht / beleuchtete Brücke (Startseite-Highlight) – noch offen
+    // Impressionen-Galerie auf der Startseite
+    gallery: [
+      "../assets/gallery-1.jpg", // Bug / Insel
+      "../assets/gallery-2.jpg", // Baden
+      "../assets/gallery-3.jpg", // Zadar (goldene Stunde)
+      "../assets/gallery-4.jpg", // Champagner an Bord
+      "../assets/gallery-5.jpg", // Boot in der Marina
+      "../assets/gallery-6.jpg"  // Gäste an Bord
+    ]
+  },
   lat: 44.0664081,
   lng: 15.2702796,
   boat: "Scarani Coral 30",

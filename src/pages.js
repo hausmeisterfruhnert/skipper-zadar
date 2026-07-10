@@ -5,6 +5,30 @@
 
 const pick = (l, o) => o[l];
 
+// Zeigt ein echtes Foto (falls in data.js images.<key> gesetzt) oder ein markenfarbenes Panel
+function photo(ctx, key, opts){
+  opts = opts || {};
+  const src = ctx.BRAND.images && ctx.BRAND.images[key];
+  const ratio = opts.ratio || '4/3';
+  if(src){
+    return `<div class="photo-frame" style="aspect-ratio:${ratio}"><img src="${src}" alt="${opts.alt||''}" loading="lazy"></div>`;
+  }
+  return `<div class="photo-brand" style="aspect-ratio:${ratio}">
+    <span class="pb-emoji">${opts.emoji||'📷'}</span>
+    ${opts.label?`<span class="pb-label">${opts.label}</span>`:''}
+  </div>`;
+}
+
+// Impressionen-Galerie (echte Fotos falls gesetzt, sonst Marken-Panels)
+function galleryGrid(ctx){
+  const imgs = (ctx.BRAND.images && ctx.BRAND.images.gallery) || [];
+  const em = ['🛥️','🏝️','🥂','🐚','🌅','⚓'];
+  return imgs.map((src,i)=> src
+    ? `<div class="gal-item"><img src="${src}" alt="" loading="lazy"></div>`
+    : `<div class="gal-item photo-brand"><span class="pb-emoji">${em[i%em.length]}</span></div>`
+  ).join("");
+}
+
 // gemeinsame CTA-Band
 function ctaBand(ctx){
   const { l, t, BRAND, wa, waMsg, IC } = ctx;
@@ -170,6 +194,25 @@ exports.index = (ctx) => {
     </div>
   </section>
 
+  <section class="section-sand"><div class="container split narrow" style="align-items:center">
+    <div>${photo(ctx,'night',{ratio:'16/10',emoji:'🌉',label:pick(l,{de:'Zadar bei Nacht',hr:'Zadar noću',en:'Zadar by night'})})}</div>
+    <div>
+      <span class="eyebrow">${pick(l,{de:'Stimmung',hr:'Ugođaj',en:'Atmosphere'})}</span>
+      <h2>${pick(l,{de:'Zadar bei Nacht',hr:'Zadar noću',en:'Zadar by night'})}</h2>
+      <p class="lead">${pick(l,{de:'Wenn die Sonne untergeht und die Lichter der Stadt sich im Wasser spiegeln, zeigt sich Zadar von seiner schönsten Seite – ein besonderes Erlebnis bei einer Abend- oder Sonnenuntergangsfahrt.',hr:'Kad sunce zađe i svjetla grada se zrcale u moru, Zadar pokazuje svoju najljepšu stranu – poseban doživljaj na večernjoj vožnji ili vožnji u zalazak sunca.',en:'When the sun sets and the city lights reflect on the water, Zadar shows its most beautiful side – a special experience on an evening or sunset cruise.'})}</p>
+      <a class="btn btn-primary" href="buchung.html">${t.book}</a>
+    </div>
+  </div></section>
+
+  <section><div class="container">
+    <div style="text-align:center;max-width:680px;margin:0 auto 26px">
+      <span class="eyebrow">${pick(l,{de:'Impressionen',hr:'Dojmovi',en:'Impressions'})}</span>
+      <h2>${pick(l,{de:'Eindrücke von Bord',hr:'Trenuci s broda',en:'Moments on board'})}</h2>
+      <p class="lead">${pick(l,{de:'Ein paar Eindrücke von unseren Touren, dem Boot und der Adria rund um Zadar.',hr:'Nekoliko dojmova s naših tura, broda i Jadrana oko Zadra.',en:'A few impressions from our tours, the boat and the Adriatic around Zadar.'})}</p>
+    </div>
+    <div class="gallery">${galleryGrid(ctx)}</div>
+  </div></section>
+
   ${ctaBand(ctx)}`;
   return { title:x.h1, desc:x.lead.slice(0,155), body };
 };
@@ -327,12 +370,15 @@ exports.boot = (ctx) => {
   </div></section>
   <section><div class="container split narrow">
     <div>
-      <div class="photo-ph" style="aspect-ratio:4/3">📷 Foto: Scarani Coral 30<br>(hier euer Boot-Foto einfügen)</div>
+      ${photo(ctx,'boat',{ratio:'4/3',emoji:'🛥️',label:'Scarani Coral 30',alt:'Scarani Coral 30'})}
     </div>
     <div>
       <p>${x.p1}</p><p>${x.p2}</p>
       <h3 style="margin-top:1em">${x.skipperH}</h3><p>${x.skipperP}</p>
     </div>
+  </div></section>
+  <section style="padding-top:0"><div class="container" style="max-width:820px">
+    ${photo(ctx,'boatDeck',{ratio:'16/9',emoji:'🛥️',alt:'Scarani Coral 30'})}
   </div></section>
   <section class="section-sand"><div class="container">
     <h2 class="center" style="margin-bottom:26px">${x.specsH}</h2>
@@ -416,7 +462,7 @@ exports["ueber-uns"] = (ctx) => {
   </div></section>
   <section><div class="container split narrow">
     <div>
-      <div class="about-photo"><div class="ph">📷<br>${l==='de'?'Foto von Andreas / Boot':l==='hr'?'Fotografija Andreasa / broda':'Photo of Andreas / boat'}<br><small>(hier einfügen)</small></div></div>
+      ${photo(ctx,'owner',{ratio:'4/5',emoji:'⚓',label:pick(l,{de:'Andreas Fruhnert · Euer Skipper',hr:'Andreas Fruhnert · Vaš skiper',en:'Andreas Fruhnert · Your skipper'}),alt:'Skipper Zadar & Boat Rent – Zadar'})}
     </div>
     <div>${x.p.map(pp=>`<p>${pp}</p>`).join("")}
       <div style="margin-top:10px"><a class="btn btn-primary" href="kontakt.html">${t.contactUs}</a></div>
