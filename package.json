@@ -1,0 +1,10 @@
+{
+  "name": "skipper-zadar-website",
+  "version": "1.0.0",
+  "description": "Dreisprachige Website fuer Skipper Zadar & Boat Rent",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
