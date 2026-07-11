@@ -601,15 +601,15 @@ exports.partner = (ctx) => {
   const x = pick(l,{
     de:{ h1:"Partner & Empfehlungen",
       lead:"Unsere persönlichen Empfehlungen rund um deinen Aufenthalt in Zadar – schöne Unterkünfte und die Seefahrtschule fürs Küstenpatent. Sag gern, dass du über uns kommst!",
-      apartH:"Übernachten in Zadar", schoolH:"Küstenpatent machen",
+      apartH:"Übernachten in Zadar", schoolH:"Küstenpatent machen", homecareH:"Auch von uns – Objektbetreuung",
       website:"Zur Website", reviews:"Bewertungen" },
     hr:{ h1:"Partneri i preporuke",
       lead:"Naše osobne preporuke za vaš boravak u Zadru – lijepi smještaji i škola za voditelja brodice. Slobodno recite da dolazite preko nas!",
-      apartH:"Smještaj u Zadru", schoolH:"Ispit za voditelja brodice",
+      apartH:"Smještaj u Zadru", schoolH:"Ispit za voditelja brodice", homecareH:"Također od nas – upravljanje nekretninama",
       website:"Na web stranicu", reviews:"recenzije" },
     en:{ h1:"Partners & Recommendations",
       lead:"Our personal recommendations for your stay in Zadar – lovely places to stay and the sailing school for your skipper licence. Feel free to mention you came through us!",
-      apartH:"Where to stay in Zadar", schoolH:"Get your skipper licence",
+      apartH:"Where to stay in Zadar", schoolH:"Get your skipper licence", homecareH:"Also from us – property care",
       website:"Visit website", reviews:"reviews" }
   });
   const card = (p) => {
@@ -639,6 +639,10 @@ exports.partner = (ctx) => {
   <section class="section-sand"><div class="container">
     <h2 style="margin-bottom:22px">⚓ ${x.schoolH}</h2>
     <div class="grid grid-2">${PARTNERS.school.map(card).join("")}</div>
+  </div></section>
+  <section><div class="container">
+    <h2 style="margin-bottom:22px">🏠 ${x.homecareH}</h2>
+    <div class="grid grid-2">${PARTNERS.homecare.map(card).join("")}</div>
   </div></section>
   ${ctaBand(ctx)}`;
   return { title:x.h1, desc:x.lead.slice(0,155), body };

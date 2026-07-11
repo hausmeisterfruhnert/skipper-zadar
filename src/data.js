@@ -279,6 +279,15 @@ const PARTNERS = {
       hr:{ type:"Voditelj brodice", d:"Tečajevi za voditelja brodice na njemačkom u Zadru – položite ispit i sami zaplovite Jadranom. Savršen dodatak vašem odmoru na moru." },
       en:{ type:"Coastal skipper licence", d:"German-language coastal skipper courses in Zadar – get your boating licence and cruise Croatia yourself. A perfect way to round off your holiday on the water." }
     }
+  ],
+  homecare: [
+    {
+      name:"Croatian Home Care", emoji:"🏠",
+      url:"https://homecare-zadar.com",
+      de:{ type:"Objektbetreuung & Hausverwaltung", d:"Unser eigener, deutschsprachiger Service rund um Zadar: Schlüsselservice, Gäste Check-in/-out, Reinigung, Instandhaltung und Verwaltung – auch auf den Inseln (Preko, Ugljan) mit eigenem Boot. Ihr Zuhause an der Adria in besten Händen." },
+      hr:{ type:"Briga o nekretninama i upravljanje", d:"Naš vlastiti servis na njemačkom oko Zadra: usluga ključa, prijava/odjava gostiju, čišćenje, održavanje i upravljanje – i na otocima (Preko, Ugljan) vlastitim brodom. Vaš dom na Jadranu u najboljim rukama." },
+      en:{ type:"Property care & management", d:"Our own German-speaking service around Zadar: key handling, guest check-in/-out, cleaning, maintenance and management – also on the islands (Preko, Ugljan) by our own boat. Your Adriatic home in the best hands." }
+    }
   ]
 };
 
