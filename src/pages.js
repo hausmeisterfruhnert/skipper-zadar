@@ -558,6 +558,8 @@ exports.buchung = (ctx) => {
       onlineH:"Book online",onlineP:"Opens our secure booking system (Shore). A deposit secures the boat & skipper – in bad weather 100% back or a new date.",
       openBtn:"Go to booking system",altH:"Prefer a personal touch?",altP:"Message us on WhatsApp or call – we’ll find your date."}
   });
+  const bkLoc = { de:"de-DE", hr:"en", en:"en" };
+  const bookingUrl = `${BRAND.booking}?locale=${bkLoc[l]||"de-DE"}`;
   const body = `
   <section class="page-hero"><div class="container">
     <div class="breadcrumb"><a href="index.html">${t.nav.index}</a> › ${x.h1}</div>
@@ -565,16 +567,22 @@ exports.buchung = (ctx) => {
   </div></section>
   <section><div class="container">
     <div class="grid grid-3">${x.steps.map(s=>`<div class="card"><div class="ic">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("")}</div>
-    <div class="split narrow" style="margin-top:40px;align-items:center">
-      <div class="card" style="text-align:center;padding:36px">
-        <div style="font-size:2.6rem">⚓</div>
-        <h3>${x.onlineH}</h3><p style="color:var(--muted)">${x.onlineP}</p>
-        <a class="btn btn-primary btn-lg" href="${BRAND.booking}" target="_blank" rel="noopener">${x.openBtn} →</a>
-      </div>
-      <div class="card" style="padding:36px">
-        <h3>${x.altH}</h3><p style="color:var(--muted)">${x.altP}</p>
-        <a class="btn btn-wa" style="width:100%;justify-content:center;margin-bottom:10px" href="${wa(l,waMsg[l])}" target="_blank" rel="noopener">${IC.wa} ${t.whatsapp}</a>
-        <a class="btn btn-dark" style="width:100%;justify-content:center" href="tel:${BRAND.tel}">${IC.phone} ${BRAND.phoneIntl}</a>
+  </div></section>
+  <section class="section-sand"><div class="container">
+    <div style="text-align:center;max-width:660px;margin:0 auto 22px">
+      <h2>${x.onlineH}</h2><p class="lead">${x.onlineP}</p>
+    </div>
+    <div class="booking-embed">
+      <iframe src="${bookingUrl}" title="${x.onlineH}" loading="lazy"></iframe>
+    </div>
+    <p class="center" style="margin-top:12px;font-size:.9rem"><a href="${BRAND.booking}" target="_blank" rel="noopener">↗ ${x.openBtn}</a></p>
+  </div></section>
+  <section><div class="container" style="max-width:760px">
+    <div class="card" style="text-align:center">
+      <h3>${x.altH}</h3><p style="color:var(--muted)">${x.altP}</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+        <a class="btn btn-wa" href="${wa(l,waMsg[l])}" target="_blank" rel="noopener">${IC.wa} ${t.whatsapp}</a>
+        <a class="btn btn-dark" href="tel:${BRAND.tel}">${IC.phone} ${BRAND.phoneIntl}</a>
       </div>
     </div>
   </div></section>`;
