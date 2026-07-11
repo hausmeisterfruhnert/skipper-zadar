@@ -16,6 +16,28 @@ const waMsg = { de:"Hallo, ich interessiere mich für eine Bootstour ab Zadar.",
 const mapEmbed = `https://www.google.com/maps?q=${BRAND.lat},${BRAND.lng}&z=13&hl=de&output=embed`;
 const mapLink  = `https://www.google.com/maps/place/Skipper+Zadar+%26+Boat+Rent/@${BRAND.lat},${BRAND.lng},14z`;
 
+// ---------- SEO ----------
+const BASE = BRAND.siteUrl || (BRAND.domain ? `https://${BRAND.domain}` : "");
+const OGLOCALE = { de:"de_DE", hr:"hr_HR", en:"en_US" };
+const SEO_JSONLD = JSON.stringify({
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "@id": BASE+"/#business",
+  name: BRAND.name,
+  description: "Bootsvermietung & private Bootstouren mit deutschem Skipper in Zadar, Kroatien.",
+  image: BASE+"/assets/hero.jpg",
+  logo: BASE+"/assets/logo-full.jpeg",
+  url: BASE+"/",
+  telephone: BRAND.tel,
+  email: BRAND.email,
+  priceRange: "€€",
+  address:{ "@type":"PostalAddress", streetAddress:"Ul. Ante Trumbića 26", addressLocality:"Zadar", postalCode:"23000", addressCountry:"HR" },
+  geo:{ "@type":"GeoCoordinates", latitude:BRAND.lat, longitude:BRAND.lng },
+  areaServed:["Zadar","Ugljan","Dugi Otok","Kroatien"],
+  sameAs:[ BRAND.instagram, mapLink, BRAND.booking ],
+  aggregateRating:{ "@type":"AggregateRating", ratingValue:"5", reviewCount:String(BRAND.reviews) }
+});
+
 const IC = {
   wa:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.8.8-1 1.9-.6 3.1.5 1.5 1.6 3 3 4.3 2 1.8 3.6 2.3 4.9 2.5.7.1 1.4.1 2-.1.6-.2 1.7-.9 1.9-1.7.2-.5.2-.9.2-1 0-.1-.2-.2-.5-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2z"/></svg>`,
   phone:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .5 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.5-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/></svg>`,
@@ -91,18 +113,37 @@ function floaters(l){
 
 // ---------- Seiten-Rahmen ----------
 function shell({l, page, title, desc, body}){
+  const seoTitle = page==='index' ? `${BRAND.name} – ${t(l).seoTag}` : `${title} | ${BRAND.name}`;
+  const canonical = `${BASE}/${l}/${page}.html`;
+  const alternates = LANGS.map(lg=>`<link rel="alternate" hreflang="${lg}" href="${BASE}/${lg}/${page}.html">`).join("\n")
+    + `\n<link rel="alternate" hreflang="x-default" href="${BASE}/de/${page}.html">`;
+  const ogImg = `${BASE}/assets/hero.jpg`;
   return `<!doctype html>
 <html lang="${l}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${title} · ${BRAND.name}</title>
+<title>${seoTitle}</title>
 <meta name="description" content="${desc}">
+<link rel="canonical" href="${canonical}">
+${alternates}
+<meta name="robots" content="index,follow">
+<meta name="author" content="${BRAND.name}">
+<meta name="geo.region" content="HR-13"><meta name="geo.placename" content="Zadar"><meta name="ICBM" content="${BRAND.lat}, ${BRAND.lng}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="${BRAND.name}">
+<meta property="og:title" content="${seoTitle}">
+<meta property="og:description" content="${desc}">
+<meta property="og:url" content="${canonical}">
+<meta property="og:image" content="${ogImg}">
+<meta property="og:locale" content="${OGLOCALE[l]}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/styles.css">
 <link rel="icon" href="${BRAND.logoMark}">
+<script type="application/ld+json">${SEO_JSONLD}</script>
 </head>
 <body>
 ${header(l,page)}
@@ -184,5 +225,20 @@ if (BRAND.domain) {
 }
 // Verhindert, dass GitHub Pages die Dateien durch Jekyll verarbeitet
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
+
+// ---------- SEO: sitemap.xml + robots.txt ----------
+if (BASE) {
+  const today = "2026-07-10";
+  let urls = "";
+  for (const l of LANGS) for (const page of PAGES) {
+    const loc = `${BASE}/${l}/${page}.html`;
+    const alts = LANGS.map(lg=>`    <xhtml:link rel="alternate" hreflang="${lg}" href="${BASE}/${lg}/${page}.html"/>`).join("\n")
+      + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE}/de/${page}.html"/>`;
+    urls += `  <url>\n    <loc>${loc}</loc>\n${alts}\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+  }
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}</urlset>\n`;
+  fs.writeFileSync(path.join(OUT, "sitemap.xml"), sitemap);
+  fs.writeFileSync(path.join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${BASE}/sitemap.xml\n`);
+}
 
 console.log(`✅ Build fertig: ${count} Seiten (${LANGS.length} Sprachen × ${PAGES.length}) in /dist`);

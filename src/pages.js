@@ -215,7 +215,12 @@ exports.index = (ctx) => {
   </div></section>
 
   ${ctaBand(ctx)}`;
-  return { title:x.h1, desc:x.lead.slice(0,155), body };
+  const metaDesc = pick(l,{
+    de:"Bootsvermietung & private Bootstouren in Zadar mit deutschem Skipper. Halb- & Ganztagestouren zu Buchten, Inseln & Sandstränden auf der Scarani Coral 30 (bis 8 Personen). Jetzt buchen!",
+    hr:"Najam broda i privatni izleti brodom u Zadru s njemačkim skiperom. Poludnevne i cjelodnevne ture do uvala, otoka i pješčanih plaža. Rezervirajte odmah!",
+    en:"Boat rental & private boat tours in Zadar with a German-speaking skipper. Half- and full-day trips to bays, islands & sandy beaches on the Scarani Coral 30. Book now!"
+  });
+  return { title:x.h1, desc:metaDesc, body };
 };
 
 /* ---------------- TOUREN ---------------- */

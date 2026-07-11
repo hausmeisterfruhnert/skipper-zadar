@@ -18,7 +18,10 @@ const BRAND = {
   booking: "https://connect.shore.com/bookings/skipper-zadar-boat-rent-fruhnert-deutsch/services",
   instagram: "https://www.instagram.com/fruhnert_zadar",
   instaHandle: "@fruhnert_zadar",
-  domain: "", // z.B. "www.skipper-zadar.com" – wenn gesetzt, wird beim Build eine CNAME-Datei erzeugt (Custom Domain)
+  // siteUrl = Basis-Adresse für SEO (Canonical/hreflang/Sitemap).
+  siteUrl: "https://skipper-zadar.com",
+  // domain = schaltet die Custom Domain scharf (erzeugt CNAME). Erst hochladen, wenn die Strato-DNS eingerichtet ist!
+  domain: "skipper-zadar.com",
   // Fotos: Dateien in assets/ legen und Pfad eintragen (z.B. "../assets/boot-1.jpg"). Leer = markenfarbenes Panel.
   images: {
     boat:     "../assets/boat-main.jpg", // Hauptfoto Boot (Seite „Das Boot")
@@ -63,6 +66,7 @@ const UI = {
     quick:"Schnellzugriff", legal:"Rechtliches", contactH:"Kontakt",
     hoursH:"Erreichbarkeit", hoursV:"Täglich · nach Vereinbarung", rights:"Alle Rechte vorbehalten.",
     imprint:"Impressum", privacy:"Datenschutz", terms:"AGB",
+    seoTag:"Bootsvermietung & private Bootstouren Zadar",
     disclaimer:"Hinweis: Diese Website ist ein Entwurf. Bilder teils Platzhalter – bitte durch eigene Fotos ersetzen."
   },
   hr:{
@@ -75,6 +79,7 @@ const UI = {
     quick:"Brzi izbornik", legal:"Pravno", contactH:"Kontakt",
     hoursH:"Dostupnost", hoursV:"Svaki dan · po dogovoru", rights:"Sva prava pridržana.",
     imprint:"Impressum", privacy:"Privatnost", terms:"Uvjeti",
+    seoTag:"Najam broda i privatni izleti brodom u Zadru",
     disclaimer:"Napomena: Ova stranica je nacrt. Dio slika su rezervirana mjesta – zamijenite vlastitim fotografijama."
   },
   en:{
@@ -87,6 +92,7 @@ const UI = {
     quick:"Quick links", legal:"Legal", contactH:"Contact",
     hoursH:"Availability", hoursV:"Daily · by arrangement", rights:"All rights reserved.",
     imprint:"Imprint", privacy:"Privacy", terms:"Terms",
+    seoTag:"Boat Rental & Private Boat Tours Zadar",
     disclaimer:"Note: This website is a draft. Some images are placeholders – please replace with your own photos."
   }
 };
