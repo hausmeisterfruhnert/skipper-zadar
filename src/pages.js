@@ -472,11 +472,12 @@ exports["ueber-uns"] = (ctx) => {
     <div class="breadcrumb"><a href="index.html">${t.nav.index}</a> › ${x.h1}</div>
     <h1>${x.h1}</h1><p class="lead">${x.lead}</p>
   </div></section>
-  <section><div class="container split narrow">
-    <div>
-      ${photo(ctx,'owner',{ratio:'4/5',emoji:'⚓',label:pick(l,{de:'Andreas Fruhnert · Euer Skipper',hr:'Andreas Fruhnert · Vaš skiper',en:'Andreas Fruhnert · Your skipper'}),alt:'Skipper Zadar & Boat Rent – Zadar'})}
-    </div>
-    <div>${x.p.map(pp=>`<p>${pp}</p>`).join("")}
+  <section><div class="container about-intro">
+    <figure class="about-portrait">
+      <div class="photo-frame" style="aspect-ratio:4/5"><img src="${BRAND.images.owner}" alt="Andreas Fruhnert – Skipper Zadar & Boat Rent" loading="lazy"></div>
+      <figcaption>${pick(l,{de:'Andreas Fruhnert · Euer Skipper',hr:'Andreas Fruhnert · Vaš skiper',en:'Andreas Fruhnert · Your skipper'})}</figcaption>
+    </figure>
+    <div class="about-text">${x.p.map(pp=>`<p>${pp}</p>`).join("")}
       <div style="margin-top:10px"><a class="btn btn-primary" href="kontakt.html">${t.contactUs}</a></div>
     </div>
   </div></section>

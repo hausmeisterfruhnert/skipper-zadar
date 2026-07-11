@@ -26,7 +26,7 @@ const BRAND = {
   images: {
     boat:     "../assets/boat-main.jpg", // Hauptfoto Boot (Seite „Das Boot")
     boatDeck: "../assets/boat-2.jpg",    // zweites Boot-Foto – Seite „Das Boot"
-    owner:    "../assets/about-neutral.jpg", // Über uns: neutrales Zadar-Motiv (Platzhalter, bis echtes Foto von Andreas da ist)
+    owner:    "../assets/about-andreas.jpg", // Über uns: echtes Foto von Andreas Fruhnert
     night:    "../assets/night-zadar.jpg", // Zadar-Hafen bei Nacht / beleuchtete Brücke (Startseite-Highlight)
     hero:     "../assets/hero.jpg", // dezentes Hintergrundbild im Hero oben
     // Impressionen-Galerie auf der Startseite
