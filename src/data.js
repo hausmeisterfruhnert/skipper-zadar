@@ -60,7 +60,7 @@ const UI = {
     nav:{ index:"Start", touren:"Touren", boot:"Das Boot", preise:"Preise", "ueber-uns":"Über uns", partner:"Partner", kontakt:"Kontakt" },
     book:"Jetzt buchen", whatsapp:"WhatsApp", callNow:"Anrufen", viewTours:"Touren ansehen",
     requestOffer:"Angebot anfragen", contactUs:"Kontakt aufnehmen", allTours:"Alle Touren & Preise",
-    from:"ab", perBoat:"pro Boot / Crew", hours:"Std.", included:"Inklusive", highlights:"Highlights",
+    from:"ab", perBoat:"pro Boot / Crew", perPerson:"pro Person", perPersonShort:"/ Pers.", hours:"Std.", included:"Inklusive", highlights:"Highlights",
     details:"Details & Buchung", bookThis:"Diese Tour buchen", onRequest:"auf Anfrage",
     footTagline:"Private Bootstouren & Bootsvermietung mit deutschem Skipper ab Zadar.",
     quick:"Schnellzugriff", legal:"Rechtliches", contactH:"Kontakt",
@@ -73,7 +73,7 @@ const UI = {
     nav:{ index:"Početna", touren:"Ture", boot:"Brod", preise:"Cijene", "ueber-uns":"O nama", partner:"Partneri", kontakt:"Kontakt" },
     book:"Rezerviraj", whatsapp:"WhatsApp", callNow:"Nazovi", viewTours:"Pogledaj ture",
     requestOffer:"Zatraži ponudu", contactUs:"Kontaktirajte nas", allTours:"Sve ture i cijene",
-    from:"od", perBoat:"po brodu / posadi", hours:"h", included:"Uključeno", highlights:"Vrhunci",
+    from:"od", perBoat:"po brodu / posadi", perPerson:"po osobi", perPersonShort:"/ os.", hours:"h", included:"Uključeno", highlights:"Vrhunci",
     details:"Detalji i rezervacija", bookThis:"Rezerviraj ovu turu", onRequest:"na upit",
     footTagline:"Privatni izleti brodom i najam broda s njemačkim skiperom iz Zadra.",
     quick:"Brzi izbornik", legal:"Pravno", contactH:"Kontakt",
@@ -86,7 +86,7 @@ const UI = {
     nav:{ index:"Home", touren:"Tours", boot:"The Boat", preise:"Prices", "ueber-uns":"About", partner:"Partners", kontakt:"Contact" },
     book:"Book now", whatsapp:"WhatsApp", callNow:"Call us", viewTours:"View tours",
     requestOffer:"Request a quote", contactUs:"Get in touch", allTours:"All tours & prices",
-    from:"from", perBoat:"per boat / crew", hours:"hrs", included:"Included", highlights:"Highlights",
+    from:"from", perBoat:"per boat / crew", perPerson:"per person", perPersonShort:"/ pers.", hours:"hrs", included:"Included", highlights:"Highlights",
     details:"Details & booking", bookThis:"Book this tour", onRequest:"on request",
     footTagline:"Private boat tours & boat rental with a German-speaking skipper from Zadar.",
     quick:"Quick links", legal:"Legal", contactH:"Contact",
@@ -181,7 +181,7 @@ const TOURS = [
       hi:["Snorkel the “St. Michele” shipwreck","Golubinka sea cave & the “Dragon’s Eye”","Sakarun – one of Croatia’s finest sandy beaches","Cold-War Yugoslav submarine bunkers"] }
   },
   {
-    id:"charter", media:"../assets/tour-charter.jpg", slug:"touren", group:"charter", emoji:"🧭", hrs:0, price:"",
+    id:"charter", media:"../assets/night-zadar.jpg", slug:"touren", group:"charter", emoji:"🧭", hrs:0, price:"",
     tag:{de:"Individuell",hr:"Individualno",en:"Bespoke"},
     de:{ title:"Individuelle Bootstour nach Wunsch",
       teaser:"Ihr bestimmt Dauer und Route – Insel-Transfer, Sonnenuntergangsfahrt, Feier oder Junggesellenabschied. Euer Skipper meldet sich mit einem maßgeschneiderten Festpreis.",
@@ -195,6 +195,39 @@ const TOURS = [
       teaser:"You choose the duration and route – island transfer, sunset cruise, celebration or stag/hen party. Your skipper replies with a tailored fixed price.",
       inc:["Flexible duration & custom route","Island transfers possible","Sunset & special-occasion trips","No-obligation request – fixed price in advance"],
       hi:["Perfect for celebrations & groups","German-speaking skipper, quick reply","Price tailored to duration"] }
+  },
+  {
+    id:"sunset", media:"../assets/tour-charter.jpg", slug:"touren", group:"charter", emoji:"🌅",
+    hrs:2, price:"200", tag:{de:"Sonnenuntergang",hr:"Zalazak sunca",en:"Sunset"}, gold:true,
+    de:{ title:"Sonnenuntergangstour – privat",
+      teaser:"Der berühmte Sonnenuntergang von Zadar (laut Hitchcock der schönste der Welt) – ganz privat vom Meer aus. 2 Stunden entspanntes Cruisen vor Altstadt und Inseln, mit einer Flasche gekühltem kroatischem Schaumwein & Knabbereien. Nur ihr, eure Begleitung und der Skipper.",
+      inc:["Flasche gekühlter kroatischer Schaumwein (Pjenušac) & Knabbereien 🥂","Erfahrener deutscher Skipper","Meeresorgel & „Gruß an die Sonne\" vom Wasser aus","Jede weitere Stunde nur +100 €"],
+      hi:["Ganz privat – nur ihr & der Skipper (bis 8 Personen)","Ideal für Paare, Heiratsanträge & besondere Abende","Start ab Marina Zadar"] },
+    hr:{ title:"Tura u zalazak sunca – privatno",
+      teaser:"Slavni zalazak sunca u Zadru (prema Hitchcocku najljepši na svijetu) – potpuno privatno s mora. 2 sata opuštene vožnje pokraj Starog grada i otoka, uz bocu hladnog hrvatskog pjenušca i grickalice. Samo vi, vaše društvo i skiper.",
+      inc:["Boca hladnog hrvatskog pjenušca i grickalice 🥂","Iskusni njemački skiper","Morske orgulje i „Pozdrav suncu\" s mora","Svaki dodatni sat samo +100 €"],
+      hi:["Potpuno privatno – samo vi i skiper (do 8 osoba)","Idealno za parove, prosidbe i posebne večeri","Polazak iz marine Zadar"] },
+    en:{ title:"Private Sunset Cruise",
+      teaser:"Zadar's famous sunset (called the world's most beautiful by Hitchcock) – fully private from the water. 2 hours of relaxed cruising past the old town and islands, with a bottle of chilled Croatian sparkling wine & snacks. Just you, your company and the skipper.",
+      inc:["A bottle of chilled Croatian sparkling wine & snacks 🥂","Experienced German-speaking skipper","The Sea Organ & „Greeting to the Sun\" from the water","Each additional hour only +100 €"],
+      hi:["Fully private – just you & the skipper (up to 8)","Ideal for couples, proposals & special evenings","Departure from Marina Zadar"] }
+  },
+  {
+    id:"properson", media:"../assets/tour-lite-halb.jpg", slug:"touren", group:"charter", emoji:"👣",
+    perPerson:true, price:"55", minPax:3, durLabel:{de:"ab 2 Std.",hr:"od 2 h",en:"from 2 hrs"},
+    tag:{de:"Pro Person",hr:"Po osobi",en:"Per person"},
+    de:{ title:"Ausflug nach Wunsch – pro Person",
+      teaser:"Ihr wollt einfach ein paar Stunden aufs Meer, ohne gleich das ganze Boot zu buchen? Sagt uns Wunschdauer und -route – wir bestätigen, was machbar ist. Pro Person, ab 3 Personen, ab 2 Stunden.",
+      inc:["Erfahrener Skipper (Deutsch/Englisch)","Route & Dauer nach Absprache","Gekühlte Softdrinks an Bord","Treibstoff inklusive"],
+      hi:["Ideal für Einzelgäste, Paare & kleine Gruppen","Ab 2 Stunden – ihr bestimmt die Zeit","Wunsch mitteilen → Skipper bestätigt Machbarkeit"] },
+    hr:{ title:"Izlet po želji – po osobi",
+      teaser:"Želite samo nekoliko sati na moru bez najma cijelog broda? Recite nam željeno trajanje i rutu – potvrdimo što je izvedivo. Po osobi, od 3 osobe, od 2 sata.",
+      inc:["Iskusni skiper (njemački/engleski)","Ruta i trajanje po dogovoru","Hladni sokovi na brodu","Gorivo uključeno"],
+      hi:["Idealno za pojedince, parove i male grupe","Od 2 sata – vi određujete vrijeme","Recite želju → skiper potvrđuje izvedivost"] },
+    en:{ title:"Trip Your Way – Per Person",
+      teaser:"Just want a few hours at sea without booking the whole boat? Tell us your preferred time and route – we confirm what's possible. Per person, from 3 guests, from 2 hours.",
+      inc:["Experienced skipper (German/English)","Route & duration by arrangement","Chilled soft drinks on board","Fuel included"],
+      hi:["Ideal for solo guests, couples & small groups","From 2 hours – you set the time","Tell us your wish → skipper confirms feasibility"] }
   }
 ];
 

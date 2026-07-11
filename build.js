@@ -159,12 +159,12 @@ ${floaters(l)}
 const tourCard = (l, tr) => {
   const d = tr[l];
   const priceHtml = tr.price
-    ? `<div class="tour-price">${money(tr.price)}<small>${t(l).perBoat}</small></div>`
+    ? `<div class="tour-price">${money(tr.price)}<small>${tr.perPerson?t(l).perPerson:t(l).perBoat}</small></div>`
     : `<div class="tour-price">${t(l).onRequest}<small>&nbsp;</small></div>`;
-  const meta = [
-    tr.hrs ? `<span>${IC.clock.replace('viewBox','width="15" viewBox')} ${tr.hrs} ${t(l).hours}</span>` : `<span>🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}</span>`,
-    `<span>👥 ${l==='de'?'bis':l==='hr'?'do':'up to'} ${BRAND.capacity}</span>`
-  ].join("");
+  const durTxt = tr.hrs ? `${IC.clock.replace('viewBox','width="15" viewBox')} ${tr.hrs} ${t(l).hours}`
+    : (tr.durLabel ? `⏱️ ${tr.durLabel[l]}` : `🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}`);
+  const paxTxt = tr.minPax ? `👥 ${l==='de'?'ab':l==='hr'?'od':'from'} ${tr.minPax}` : `👥 ${l==='de'?'bis':l==='hr'?'do':'up to'} ${BRAND.capacity}`;
+  const meta = [`<span>${durTxt}</span>`, `<span>${paxTxt}</span>`].join("");
   const link = tr.slug==="dugi-otok" ? "dugi-otok.html" : "buchung.html";
   return `<article class="tour">
     <div class="tour-media">

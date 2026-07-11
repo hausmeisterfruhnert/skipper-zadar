@@ -133,7 +133,7 @@ exports.index = (ctx) => {
     }
   });
   const featured = TOURS[0], island = TOURS.find(z=>z.id==="dugi-otok");
-  const preview = TOURS.filter(z=>["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok"].includes(z.id));
+  const preview = ["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok","sunset","properson"].map(id=>TOURS.find(z=>z.id===id)).filter(Boolean);
   const body = `
   <section class="hero">
     ${ctx.BRAND.images.hero?`<img class="hero-bg" src="${ctx.BRAND.images.hero}" alt="">`:''}
@@ -246,13 +246,13 @@ exports.touren = (ctx) => {
         const d=tr[l];
         return `<div class="tour"><div class="tour-media"><span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>${tr.media?`<img class="tour-img" src="${tr.media}" alt="" loading="lazy">`:`<span class="emoji">${tr.emoji}</span>`}</div>
           <div class="tour-body"><h3>${d.title}</h3>
-          <div class="tour-meta">${tr.hrs?`<span>⏱️ ${tr.hrs} ${t.hours}</span>`:`<span>🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}</span>`}<span>👥 ${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity}</span></div>
+          <div class="tour-meta"><span>${tr.hrs?`⏱️ ${tr.hrs} ${t.hours}`:(tr.durLabel?`⏱️ ${tr.durLabel[l]}`:`🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}`)}</span><span>👥 ${tr.minPax?`${l==='de'?'ab':l==='hr'?'od':'from'} ${tr.minPax}`:`${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity}`}</span></div>
           <p>${d.teaser}</p>
           <details style="margin:6px 0 14px"><summary style="cursor:pointer;font-weight:700;color:var(--teal)">${x.incl} &amp; ${x.hl}</summary>
             <ul class="includes" style="margin:12px 0">${d.inc.map(i=>`<li>${i}</li>`).join("")}</ul>
             <ul class="includes" style="margin:12px 0">${d.hi.map(i=>`<li style="--x:1">✦ ${i}</li>`).join("")}</ul>
           </details>
-          <div class="tour-foot">${tr.price?`<div class="tour-price">${ctx.money(tr.price)}<small>${t.perBoat}</small></div>`:`<div class="tour-price">${t.onRequest}<small>&nbsp;</small></div>`}
+          <div class="tour-foot">${tr.price?`<div class="tour-price">${ctx.money(tr.price)}<small>${tr.perPerson?t.perPerson:t.perBoat}</small></div>`:`<div class="tour-price">${t.onRequest}<small>&nbsp;</small></div>`}
           <a class="btn btn-dark" href="${tr.slug==='dugi-otok'?'dugi-otok.html':'buchung.html'}">${tr.slug==='dugi-otok'?t.details:t.bookThis}</a></div>
         </div></div>`;
       }).join("")}</div></div>`;
@@ -413,7 +413,13 @@ exports.preise = (ctx) => {
       noteH:"Deposit & weather guarantee",note:"Your deposit secures the boat & skipper. If the tour is cancelled due to wind (Jugo/Bura) or rain, you get 100% back or we move to a sunny day.",
       per:"per boat"}
   });
-  const row = (tr) => {const d=tr[l];return `<div class="price-row"><div><div class="name">${d.title}</div><div class="desc">${tr.hrs?tr.hrs+' '+t.hours+' · ':''}${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity} ${l==='de'?'Pers.':l==='hr'?'os.':'guests'}</div></div><div class="amt">${tr.price?money(tr.price):t.onRequest}</div></div>`;};
+  const row = (tr) => {const d=tr[l];
+    const persW = l==='de'?'Pers.':l==='hr'?'os.':'guests';
+    const dur = tr.hrs?tr.hrs+' '+t.hours:(tr.durLabel?tr.durLabel[l]:'');
+    const pax = tr.minPax?`${l==='de'?'ab':l==='hr'?'od':'from'} ${tr.minPax} ${persW}`:`${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity} ${persW}`;
+    const desc = [dur,pax].filter(Boolean).join(' · ');
+    const amt = tr.price?`${money(tr.price)}${tr.perPerson?` <span style="font-size:.62em;font-weight:600;color:var(--muted)">${t.perPersonShort}</span>`:''}`:t.onRequest;
+    return `<div class="price-row"><div><div class="name">${d.title}</div><div class="desc">${desc}</div></div><div class="amt">${amt}</div></div>`;};
   const addRow = (a)=>`<div class="price-row"><div><div class="name">${a.emoji} ${a[l].n}</div><div class="desc">${a[l].d}</div></div><div class="amt">${money(a.price)}</div></div>`;
   const body = `
   <section class="page-hero"><div class="container">
@@ -647,7 +653,6 @@ function legalShell(ctx, h1, lead, inner){
     <h1>${h1}</h1><p class="lead">${lead}</p>
   </div></section>
   <section><div class="container"><div class="prose">${inner}
-    <div class="notice" style="margin-top:26px">${pick(ctx.l,{de:"⚠️ Dieser Rechtstext ist ein unverbindlicher Entwurf und ersetzt keine Rechtsberatung. Bitte vor Veröffentlichung von einer fachkundigen Person prüfen und die mit „[…]“ markierten Angaben ergänzen.",hr:"⚠️ Ovaj pravni tekst je neobvezujući nacrt i ne zamjenjuje pravni savjet. Prije objave neka ga provjeri stručna osoba i dopunite podatke označene s „[…]“.",en:"⚠️ This legal text is a non-binding draft and does not replace legal advice. Please have it reviewed by a professional before publishing and complete the fields marked “[…]”."})}</div>
   </div></div></section>`};
 }
 
@@ -686,21 +691,21 @@ exports.datenschutz = (ctx) => {
       <h3>Kontaktaufnahme</h3><p>Das Kontaktformular öffnet euer eigenes E-Mail-Programm (mailto). Es werden dabei keine Daten auf dieser Website gespeichert. Bei einer Anfrage per E-Mail, Telefon oder WhatsApp verarbeiten wir eure Angaben ausschließlich zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b DSGVO).</p>
       <h3>Google Maps</h3><p>Zur Anzeige unseres Standorts binden wir eine Karte von Google ein. Dabei kann eure IP-Adresse an Google übertragen werden. Anbieter: Google Ireland Ltd. Weitere Infos: policies.google.com/privacy.</p>
       <h3>Online-Buchung (Shore)</h3><p>Buchungen erfolgen über den Dienstleister Shore (connect.shore.com). Dort gelten die Datenschutzbestimmungen von Shore.</p>
-      <h3>Hosting & Server-Logs</h3><p>Beim Aufruf der Website kann der Hoster technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt) verarbeiten. Hosting-Anbieter: [bitte ergänzen].</p>
+      <h3>Hosting & Server-Logs</h3><p>Beim Aufruf der Website kann der Hoster technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt) verarbeiten. Hosting-Anbieter: GitHub Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.</p>
       <h3>Eure Rechte</h3><p>Ihr habt das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei der zuständigen Aufsichtsbehörde.</p>`},
     hr:{h1:"Izjava o privatnosti",lead:"Kako postupamo s vašim podacima.",
       inner:`<h3>Voditelj obrade</h3><p>${BRAND.name}, ${BRAND.owner}, ${BRAND.addr}, e-pošta: ${BRAND.email}.</p>
       <h3>Kontakt</h3><p>Kontakt obrazac otvara vaš vlastiti program za e-poštu (mailto). Pritom se na ovoj stranici ne pohranjuju podaci. Kod upita e-poštom, telefonom ili WhatsAppom vaše podatke obrađujemo isključivo radi obrade upita (čl. 6. st. 1. t. b GDPR).</p>
       <h3>Google Maps</h3><p>Za prikaz lokacije ugrađujemo Google kartu. Pritom se vaša IP adresa može prenijeti Googleu. Pružatelj: Google Ireland Ltd. Više: policies.google.com/privacy.</p>
       <h3>Online rezervacija (Shore)</h3><p>Rezervacije se odvijaju putem usluge Shore (connect.shore.com), gdje vrijede njihova pravila privatnosti.</p>
-      <h3>Hosting i zapisi poslužitelja</h3><p>Pri posjetu stranice hosting može obrađivati tehnički nužne podatke (npr. IP adresu, vrijeme). Pružatelj hostinga: [dopuniti].</p>
+      <h3>Hosting i zapisi poslužitelja</h3><p>Pri posjetu stranice hosting može obrađivati tehnički nužne podatke (npr. IP adresu, vrijeme). Pružatelj hostinga: GitHub Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, SAD.</p>
       <h3>Vaša prava</h3><p>Imate pravo na pristup, ispravak, brisanje, ograničenje, prenosivost i prigovor te pravo na pritužbu nadzornom tijelu.</p>`},
     en:{h1:"Privacy Policy",lead:"How we handle your data.",
       inner:`<h3>Controller</h3><p>${BRAND.name}, ${BRAND.owner}, ${BRAND.addr}, e-mail: ${BRAND.email}.</p>
       <h3>Contact</h3><p>The contact form opens your own e-mail program (mailto). No data is stored on this website in the process. When you contact us by e-mail, phone or WhatsApp, we process your details solely to handle your request (Art. 6(1)(b) GDPR).</p>
       <h3>Google Maps</h3><p>To show our location we embed a Google map. Your IP address may be transmitted to Google. Provider: Google Ireland Ltd. More: policies.google.com/privacy.</p>
       <h3>Online booking (Shore)</h3><p>Bookings are handled via the service Shore (connect.shore.com), where Shore’s privacy terms apply.</p>
-      <h3>Hosting & server logs</h3><p>When you visit the site the host may process technically necessary data (e.g. IP address, timestamp). Hosting provider: [to be added].</p>
+      <h3>Hosting & server logs</h3><p>When you visit the site the host may process technically necessary data (e.g. IP address, timestamp). Hosting provider: GitHub Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.</p>
       <h3>Your rights</h3><p>You have the right to access, rectification, erasure, restriction, data portability and objection, as well as the right to lodge a complaint with the supervisory authority.</p>`}
   });
   return legalShell(ctx, x.h1, x.lead, x.inner);
