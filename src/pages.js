@@ -21,10 +21,38 @@ function photo(ctx, key, opts){
 
 // Impressionen-Galerie (echte Fotos falls gesetzt, sonst Marken-Panels)
 function galleryGrid(ctx){
+  const l = ctx.l;
   const imgs = (ctx.BRAND.images && ctx.BRAND.images.gallery) || [];
   const em = ['🛥️','🏝️','🥂','🐚','🌅','⚓'];
+  const alts = {
+    de:[
+      "Scarani Coral 30 Yacht in einer türkisen Bucht vor Zadar",
+      "Privater Bootsausflug mit deutschem Skipper auf der Adria bei Zadar",
+      "Entspannen an Deck der Scarani Coral 30 auf dem Meer vor Zadar",
+      "Kristallklares Wasser einer versteckten Bucht bei Dugi Otok",
+      "Sonnenuntergang bei einer Bootstour vor Zadar",
+      "Badestopp in einer einsamen Bucht der Adria bei Zadar"
+    ],
+    hr:[
+      "Jahta Scarani Coral 30 u tirkiznoj uvali kraj Zadra",
+      "Privatni izlet brodom s njemačkim skiperom na Jadranu kod Zadra",
+      "Opuštanje na palubi Scarani Coral 30 na moru kraj Zadra",
+      "Kristalno čisto more skrivene uvale kod Dugog otoka",
+      "Zalazak sunca tijekom brodske ture ispred Zadra",
+      "Kupanje u osamljenoj uvali na Jadranu kraj Zadra"
+    ],
+    en:[
+      "Scarani Coral 30 yacht in a turquoise bay near Zadar",
+      "Private boat trip with a German-speaking skipper on the Adriatic near Zadar",
+      "Relaxing on the deck of the Scarani Coral 30 at sea off Zadar",
+      "Crystal-clear water of a hidden bay near Dugi Otok",
+      "Sunset during a boat tour off Zadar",
+      "Swim stop in a secluded Adriatic bay near Zadar"
+    ]
+  };
+  const A = alts[l] || alts.de;
   return imgs.map((src,i)=> src
-    ? `<div class="gal-item"><img src="${src}" alt="" loading="lazy"></div>`
+    ? `<div class="gal-item"><img src="${src}" alt="${A[i%A.length]}" loading="lazy"></div>`
     : `<div class="gal-item photo-brand"><span class="pb-emoji">${em[i%em.length]}</span></div>`
   ).join("");
 }
@@ -136,7 +164,7 @@ exports.index = (ctx) => {
   const preview = ["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok","sunset","properson"].map(id=>TOURS.find(z=>z.id===id)).filter(Boolean);
   const body = `
   <section class="hero">
-    ${ctx.BRAND.images.hero?`<img class="hero-bg" src="${ctx.BRAND.images.hero}" alt="">`:''}
+    ${ctx.BRAND.images.hero?`<img class="hero-bg" src="${ctx.BRAND.images.hero}" alt="${pick(l,{de:'Türkisblaues Meer und Küste bei Zadar, Kroatien',hr:'Tirkizno more i obala kod Zadra, Hrvatska',en:'Turquoise sea and coastline near Zadar, Croatia'})}" loading="lazy">`:''}
     <div class="container">
       <div>
         <span class="eyebrow">${x.eyebrow}</span>
@@ -196,7 +224,7 @@ exports.index = (ctx) => {
   </section>
 
   <section class="section-sand"><div class="container split narrow" style="align-items:center">
-    <div>${photo(ctx,'night',{ratio:'16/10',emoji:'🌉',label:pick(l,{de:'Zadar bei Nacht',hr:'Zadar noću',en:'Zadar by night'})})}</div>
+    <div>${photo(ctx,'night',{ratio:'16/10',emoji:'🌉',label:pick(l,{de:'Zadar bei Nacht',hr:'Zadar noću',en:'Zadar by night'}),alt:pick(l,{de:'Beleuchtete Meeresorgel und Uferpromenade von Zadar bei Nacht',hr:'Osvijetljene Morske orgulje i riva u Zadru noću',en:'Illuminated Sea Organ and waterfront of Zadar at night'})})}</div>
     <div>
       <span class="eyebrow">${pick(l,{de:'Stimmung',hr:'Ugođaj',en:'Atmosphere'})}</span>
       <h2>${pick(l,{de:'Zadar bei Nacht',hr:'Zadar noću',en:'Zadar by night'})}</h2>
@@ -244,7 +272,7 @@ exports.touren = (ctx) => {
     return `<div style="margin-top:40px"><h2 style="margin-bottom:18px">${x.g[g]}</h2>
       <div class="grid grid-2">${items.map(tr=>{
         const d=tr[l];
-        return `<div class="tour"><div class="tour-media"><span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>${tr.media?`<img class="tour-img" src="${tr.media}" alt="" loading="lazy">`:`<span class="emoji">${tr.emoji}</span>`}</div>
+        return `<div class="tour"><div class="tour-media"><span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>${tr.media?`<img class="tour-img" src="${tr.media}" alt="${tr[l].title} – Bootstour ab Zadar" loading="lazy">`:`<span class="emoji">${tr.emoji}</span>`}</div>
           <div class="tour-body"><h3>${d.title}</h3>
           <div class="tour-meta"><span>${tr.hrs?`⏱️ ${tr.hrs} ${t.hours}`:(tr.durLabel?`⏱️ ${tr.durLabel[l]}`:`🧭 ${l==='de'?'flexibel':l==='hr'?'fleksibilno':'flexible'}`)}</span><span>👥 ${tr.minPax?`${l==='de'?'ab':l==='hr'?'od':'from'} ${tr.minPax}`:`${l==='de'?'bis':l==='hr'?'do':'up to'} ${ctx.BRAND.capacity}`}</span></div>
           <p>${d.teaser}</p>
@@ -385,7 +413,7 @@ exports.boot = (ctx) => {
   </div></section>
   <section><div class="container split narrow">
     <div>
-      ${photo(ctx,'boat',{ratio:'4/3',emoji:'🛥️',label:'Scarani Coral 30',alt:'Scarani Coral 30'})}
+      ${photo(ctx,'boat',{ratio:'4/3',emoji:'🛥️',label:'Scarani Coral 30',alt:'Scarani Coral 30 – Motoryacht der Bootsvermietung Skipper Zadar im Hafen'})}
     </div>
     <div>
       <p>${x.p1}</p><p>${x.p3}</p><p>${x.p2}</p>
