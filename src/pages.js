@@ -356,17 +356,26 @@ exports.boot = (ctx) => {
     de:{h1:"Die Scarani Coral 30",lead:"Unser luxuriöser Daycruiser – gebaut für entspannte, komfortable Tage auf dem Meer.",
       specsH:"Ausstattung an Bord",
       specs:[["👥","Bis zu 8 Personen","Komplett privat für eure Crew"],["🛋️","Riesige Sonnenliege","Viel Platz zum Sonnenbaden & Entspannen"],["🚪","Gemütliche Kabine","Rückzugsort & Schatten unter Deck"],["🚻","Echte Bord-Toilette","Eigenes WC für maximalen Komfort"],["🏊","Große Badeplattform","Perfekter Ein- & Ausstieg ins türkise Wasser"],["🔊","Soundanlage","Eure Musik für den perfekten Tag"]],
+      dataH:"Technische Eckdaten",
+      data:[["Länge über alles","9,15 m"],["Rumpflänge","8,85 m"],["Breite","2,95 m"],["Tiefgang","ca. 0,80 m"],["Gewicht","ca. 3.800 kg"],["Kraftstofftank","2 × 160 l (320 l)"],["Frischwasser","80 l"],["Max. Personen","8"],["Motoren","2 × Volvo Penta Diesel"],["Motorleistung","2 × 118 kW (ca. 160 PS)"],["CE-Kategorie","B – hochseetauglich"]],
       p1:"Die Scarani Coral 30 ist kein enges Schlauchboot, sondern ein echter Daycruiser mit Kabine, WC und großzügigen Liegeflächen. So genießt ihr auch längere Touren – etwa zum Sakarun-Strand auf Dugi Otok – entspannt und geschützt vor Spritzwasser.",
+      p3:"Angetrieben von zwei kräftigen Volvo-Penta-Dieselmotoren (je 118 kW / rund 160 PS) liegt die knapp über 9 Meter lange Coral 30 ruhig und sicher im Wasser – auch wenn draußen etwas mehr Welle steht. Dank CE-Einstufung Kategorie B ist sie für offene Gewässer ausgelegt, sodass wir entspannt zu den vorgelagerten Inseln wie Ugljan, Ošljak und Dugi Otok übersetzen. An Bord sorgen eine schattige Kabine, eine große Sonnenliege am Bug und die geräumige Badeplattform am Heck für einen rundum bequemen Tag.",
       p2:"Standard-Start ist um 09:00 Uhr in der Marina Zadar, flexible Zeiten nach Absprache mit eurem Skipper.",skipperH:"Euer Skipper",skipperP:"Erfahren, entspannt und deutschsprachig – euer Skipper kennt die schönsten Buchten und plant die Route ganz nach euren Wünschen."},
     hr:{h1:"Scarani Coral 30",lead:"Naš luksuzni daycruiser – stvoren za opuštene, udobne dane na moru.",
       specsH:"Oprema na brodu",
       specs:[["👥","Do 8 osoba","Potpuno privatno za vašu posadu"],["🛋️","Velika ležaljka za sunčanje","Puno prostora za sunčanje i opuštanje"],["🚪","Udobna kabina","Zaklon i hlad ispod palube"],["🚻","Pravi brodski WC","Vlastiti toalet za maksimalnu udobnost"],["🏊","Velika platforma za kupanje","Savršen ulaz i izlaz u tirkizno more"],["🔊","Ozvučenje","Vaša glazba za savršen dan"]],
+      dataH:"Tehnički podaci",
+      data:[["Duljina (LOA)","9,15 m"],["Duljina trupa","8,85 m"],["Širina","2,95 m"],["Gaz","oko 0,80 m"],["Težina","oko 3.800 kg"],["Spremnik goriva","2 × 160 l (320 l)"],["Slatka voda","80 l"],["Maks. osoba","8"],["Motori","2 × Volvo Penta dizel"],["Snaga motora","2 × 118 kW (oko 160 KS)"],["CE kategorija","B – za otvoreno more"]],
       p1:"Scarani Coral 30 nije tijesni gumenjak, već pravi daycruiser s kabinom, WC-om i prostranim ležajevima. Tako i duže ture – npr. do plaže Sakarun na Dugom otoku – uživate opušteno i zaštićeni od prskanja.",
+      p3:"Pokreću je dva snažna Volvo Penta dizelska motora (svaki 118 kW / oko 160 KS), pa nešto više od 9 metara duga Coral 30 mirno i sigurno leži na vodi – čak i kad je more malo uzburkanije. Zahvaljujući CE kategoriji B namijenjena je otvorenom moru, pa opušteno plovimo do obližnjih otoka poput Ugljana, Ošljaka i Dugog otoka. Na brodu sjenovita kabina, velika ležaljka na pramcu i prostrana platforma za kupanje na krmi jamče ugodan dan.",
       p2:"Standardni polazak je u 09:00 iz marine Zadar, fleksibilni termini po dogovoru sa skiperom.",skipperH:"Vaš skiper",skipperP:"Iskusan, opušten i govori njemački – vaš skiper poznaje najljepše uvale i planira rutu prema vašim željama."},
     en:{h1:"The Scarani Coral 30",lead:"Our luxurious day cruiser – built for relaxed, comfortable days at sea.",
       specsH:"On-board features",
       specs:[["👥","Up to 8 guests","Completely private for your crew"],["🛋️","Huge sun deck","Plenty of room to sunbathe & relax"],["🚪","Cosy cabin","Retreat & shade below deck"],["🚻","Real on-board WC","Your own toilet for maximum comfort"],["🏊","Large swim platform","Perfect in & out of the turquoise water"],["🔊","Sound system","Your music for the perfect day"]],
+      dataH:"Technical data",
+      data:[["Length overall","9.15 m"],["Hull length","8.85 m"],["Beam","2.95 m"],["Draft","approx. 0.80 m"],["Weight","approx. 3,800 kg"],["Fuel tank","2 × 160 l (320 l)"],["Fresh water","80 l"],["Max. persons","8"],["Engines","2 × Volvo Penta diesel"],["Engine power","2 × 118 kW (approx. 160 hp)"],["CE category","B – offshore"]],
       p1:"The Scarani Coral 30 is not a cramped RIB but a genuine day cruiser with a cabin, WC and generous sun beds. So even longer tours – such as to Sakarun beach on Dugi Otok – are enjoyed in comfort, sheltered from spray.",
+      p3:"Powered by two strong Volvo Penta diesel engines (118 kW / about 160 hp each), the just-over-9-metre Coral 30 sits calm and steady in the water – even when there's a bit more swell outside. Its CE category B rating means it's built for open water, so we cross comfortably to the offshore islands like Ugljan, Ošljak and Dugi Otok. On board, a shaded cabin, a large sun bed on the bow and the roomy swim platform at the stern make for an all-round comfortable day.",
       p2:"Standard departure is 9:00 am from Marina Zadar; flexible times by arrangement with your skipper.",skipperH:"Your skipper",skipperP:"Experienced, relaxed and German-speaking – your skipper knows the finest bays and plans the route entirely around your wishes."}
   });
   const body = `
@@ -379,12 +388,15 @@ exports.boot = (ctx) => {
       ${photo(ctx,'boat',{ratio:'4/3',emoji:'🛥️',label:'Scarani Coral 30',alt:'Scarani Coral 30'})}
     </div>
     <div>
-      <p>${x.p1}</p><p>${x.p2}</p>
+      <p>${x.p1}</p><p>${x.p3}</p><p>${x.p2}</p>
       <h3 style="margin-top:1em">${x.skipperH}</h3><p>${x.skipperP}</p>
     </div>
   </div></section>
-  <section style="padding-top:0"><div class="container" style="max-width:820px">
-    ${photo(ctx,'boatDeck',{ratio:'16/9',emoji:'🛥️',alt:'Scarani Coral 30'})}
+  <section style="padding-top:0"><div class="container" style="max-width:680px">
+    <h2 class="center" style="margin-bottom:22px">${x.dataH}</h2>
+    <div class="spec-table">
+      ${x.data.map(d=>`<div class="spec-row"><span class="spec-k">${d[0]}</span><span class="spec-v">${d[1]}</span></div>`).join("")}
+    </div>
   </div></section>
   <section class="section-sand"><div class="container">
     <h2 class="center" style="margin-bottom:26px">${x.specsH}</h2>
@@ -494,19 +506,22 @@ exports.kontakt = (ctx) => {
   const { l, t, BRAND, IC, wa, waMsg, mapEmbed } = ctx;
   const x = pick(l,{
     de:{h1:"Kontakt",lead:"Fragen oder Wunschtermin? Schreibt uns – am schnellsten per WhatsApp.",
-      formH:"Anfrage senden",name:"Name",phone:"Telefon",topic:"Worum geht es?",date:"Wunschdatum",people:"Personen",msg:"Nachricht",send:"Anfrage per E-Mail senden",
+      formH:"Anfrage senden",name:"Name",phone:"Telefon",topic:"Worum geht es?",date:"Wunschdatum",people:"Personen",msg:"Nachricht",send:"Anfrage senden",sending:"Wird gesendet …",
       topics:["Ganztagestour","Halbtagestour","Insel-Abenteuer Dugi Otok","Individuelle Charter","Allgemeine Frage"],
-      note:"Es öffnet sich euer E-Mail-Programm mit der vorbereiteten Anfrage.",
+      note:"Danke! Deine Anfrage wurde direkt an uns gesendet – wir melden uns schnellstmöglich.",
+      errNote:"Das hat leider nicht geklappt. Bitte schreibt uns direkt per WhatsApp oder E-Mail.",
       infoH:"Direkt erreichen",baseH:"Unsere Basis"},
     hr:{h1:"Kontakt",lead:"Pitanja ili željeni termin? Pišite nam – najbrže putem WhatsAppa.",
-      formH:"Pošalji upit",name:"Ime",phone:"Telefon",topic:"O čemu se radi?",date:"Željeni datum",people:"Osobe",msg:"Poruka",send:"Pošalji upit e-poštom",
+      formH:"Pošalji upit",name:"Ime",phone:"Telefon",topic:"O čemu se radi?",date:"Željeni datum",people:"Osobe",msg:"Poruka",send:"Pošalji upit",sending:"Šalje se …",
       topics:["Cjelodnevna tura","Poludnevna tura","Otočna avantura Dugi otok","Individualni charter","Opće pitanje"],
-      note:"Otvorit će se vaš program za e-poštu s pripremljenim upitom.",
+      note:"Hvala! Vaš upit je poslan izravno nama – javit ćemo se u najkraćem roku.",
+      errNote:"Nažalost nije uspjelo. Pišite nam izravno putem WhatsAppa ili e-pošte.",
       infoH:"Izravni kontakt",baseH:"Naša baza"},
     en:{h1:"Contact",lead:"Questions or a preferred date? Message us – fastest via WhatsApp.",
-      formH:"Send a request",name:"Name",phone:"Phone",topic:"What is it about?",date:"Preferred date",people:"Guests",msg:"Message",send:"Send request by e-mail",
+      formH:"Send a request",name:"Name",phone:"Phone",topic:"What is it about?",date:"Preferred date",people:"Guests",msg:"Message",send:"Send request",sending:"Sending …",
       topics:["Full-day tour","Half-day tour","Island adventure Dugi Otok","Bespoke charter","General question"],
-      note:"Your e-mail app will open with the prepared request.",
+      note:"Thank you! Your request was sent straight to us – we'll get back to you as soon as possible.",
+      errNote:"Sorry, that didn't work. Please contact us directly via WhatsApp or e-mail.",
       infoH:"Reach us directly",baseH:"Our base"}
   });
   const body = `
@@ -516,7 +531,9 @@ exports.kontakt = (ctx) => {
   </div></section>
   <section><div class="container split" style="align-items:start">
     <form class="form" id="contactForm"
-      data-mailto="${BRAND.email}" data-subject="Anfrage Website"
+      data-endpoint="https://formsubmit.co/ajax/${BRAND.email}"
+      data-subject="Anfrage Website (${l.toUpperCase()})"
+      data-sending="${x.sending}" data-send="${x.send}"
       data-l-name="${x.name}" data-l-phone="${x.phone}" data-l-topic="${x.topic}" data-l-date="${x.date}" data-l-people="${x.people}" data-l-msg="${x.msg}">
       <h3 style="margin-top:0">${x.formH}</h3>
       <label>${x.name}</label><input name="name" required>
@@ -529,8 +546,10 @@ exports.kontakt = (ctx) => {
         <div><label>${x.people}</label><input name="people" type="number" min="1" max="8" value="2"></div>
       </div>
       <label>${x.msg}</label><textarea name="message"></textarea>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
       <button class="btn btn-primary btn-lg" style="margin-top:16px;width:100%;justify-content:center" type="submit">${x.send}</button>
-      <p id="formNote" class="notice" style="display:none;margin-top:14px">${x.note}</p>
+      <p id="formNote" class="notice notice-ok" style="display:none;margin-top:14px">${x.note}</p>
+      <p id="formErr" class="notice notice-err" style="display:none;margin-top:14px">${x.errNote}</p>
     </form>
     <div>
       <h3>${x.infoH}</h3>
