@@ -4,7 +4,7 @@
 // ============================================================
 const fs = require("fs");
 const path = require("path");
-const { BRAND, PAGES, LANGS, LANG_LABEL, UI, TOURS, ADDONS, PARTNERS } = require("./src/data");
+const { BRAND, PAGES, LANGS, LANG_LABEL, UI, TOURS, ADDONS, PARTNERS, PPTOURS, PPHIGHLIGHT, PPFAQ, PPREVIEWS } = require("./src/data");
 
 const OUT = path.join(__dirname, "dist");
 const t = (l) => UI[l];
@@ -49,7 +49,7 @@ const IC = {
 
 // ---------- Header ----------
 function header(l, page){
-  const nav = ["index","touren","boot","preise","ueber-uns","partner","kontakt"];
+  const nav = ["index","touren","pro-person","boot","preise","ueber-uns","partner","kontakt"];
   const links = nav.map(p => `<a href="${p}.html"${p===page?' class="active"':''}>${t(l).nav[p]}</a>`).join("");
   const langsw = LANGS.map(lg => `<a href="../${lg}/${page}.html"${lg===l?' class="active"':''}>${LANG_LABEL[lg]}</a>`).join("");
   return `<header class="site-header"><nav class="nav">
@@ -70,7 +70,7 @@ function header(l, page){
 
 // ---------- Footer ----------
 function footer(l){
-  const nav = ["index","touren","boot","preise","ueber-uns","partner","kontakt"];
+  const nav = ["index","touren","pro-person","boot","preise","ueber-uns","partner","kontakt"];
   const quick = nav.map(p=>`<a href="${p}.html">${t(l).nav[p]}</a>`).join("");
   return `<footer class="site-footer"><div class="container">
     <div class="footer-grid">
@@ -189,7 +189,7 @@ const tourCard = (l, tr) => {
 const C = require("./src/pages");
 
 function renderPage(l, page){
-  const ctx = { l, BRAND, TOURS, ADDONS, PARTNERS, t:t(l), IC, money, wa, waMsg, mapEmbed, mapLink, tourCard };
+  const ctx = { l, BRAND, TOURS, ADDONS, PARTNERS, PPTOURS, PPHIGHLIGHT, PPFAQ, PPREVIEWS, t:t(l), IC, money, wa, waMsg, mapEmbed, mapLink, tourCard };
   const p = C[page](ctx);
   return shell({ l, page, title:p.title, desc:p.desc, body:p.body });
 }

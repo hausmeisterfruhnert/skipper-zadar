@@ -48,7 +48,7 @@ const BRAND = {
 };
 
 // Reihenfolge & Dateinamen der Seiten
-const PAGES = ["index","touren","dugi-otok","boot","preise","ueber-uns","partner","kontakt","buchung","impressum","datenschutz","agb"];
+const PAGES = ["index","touren","pro-person","dugi-otok","boot","preise","ueber-uns","partner","kontakt","buchung","impressum","datenschutz","agb"];
 
 const LANGS = ["de","hr","en"];
 const LANG_LABEL = { de:"DE", hr:"HR", en:"EN" };
@@ -57,7 +57,7 @@ const HTML_LANG  = { de:"de", hr:"hr", en:"en" };
 // ---------- UI / Navigation / Footer ----------
 const UI = {
   de:{
-    nav:{ index:"Start", touren:"Touren", boot:"Das Boot", preise:"Preise", "ueber-uns":"Über uns", partner:"Partner", kontakt:"Kontakt" },
+    nav:{ index:"Start", touren:"Touren", "pro-person":"Pro Person", boot:"Das Boot", preise:"Preise", "ueber-uns":"Über uns", partner:"Partner", kontakt:"Kontakt" },
     book:"Jetzt buchen", whatsapp:"WhatsApp", callNow:"Anrufen", viewTours:"Touren ansehen",
     requestOffer:"Angebot anfragen", contactUs:"Kontakt aufnehmen", allTours:"Alle Touren & Preise",
     from:"ab", perBoat:"pro Boot / Crew", perPerson:"pro Person", perPersonShort:"/ Pers.", hours:"Std.", included:"Inklusive", highlights:"Highlights",
@@ -70,7 +70,7 @@ const UI = {
     disclaimer:"Hinweis: Diese Website ist ein Entwurf. Bilder teils Platzhalter – bitte durch eigene Fotos ersetzen."
   },
   hr:{
-    nav:{ index:"Početna", touren:"Ture", boot:"Brod", preise:"Cijene", "ueber-uns":"O nama", partner:"Partneri", kontakt:"Kontakt" },
+    nav:{ index:"Početna", touren:"Ture", "pro-person":"Po osobi", boot:"Brod", preise:"Cijene", "ueber-uns":"O nama", partner:"Partneri", kontakt:"Kontakt" },
     book:"Rezerviraj", whatsapp:"WhatsApp", callNow:"Nazovi", viewTours:"Pogledaj ture",
     requestOffer:"Zatraži ponudu", contactUs:"Kontaktirajte nas", allTours:"Sve ture i cijene",
     from:"od", perBoat:"po brodu / posadi", perPerson:"po osobi", perPersonShort:"/ os.", hours:"h", included:"Uključeno", highlights:"Vrhunci",
@@ -83,7 +83,7 @@ const UI = {
     disclaimer:"Napomena: Ova stranica je nacrt. Dio slika su rezervirana mjesta – zamijenite vlastitim fotografijama."
   },
   en:{
-    nav:{ index:"Home", touren:"Tours", boot:"The Boat", preise:"Prices", "ueber-uns":"About", partner:"Partners", kontakt:"Contact" },
+    nav:{ index:"Home", touren:"Tours", "pro-person":"Per Person", boot:"The Boat", preise:"Prices", "ueber-uns":"About", partner:"Partners", kontakt:"Contact" },
     book:"Book now", whatsapp:"WhatsApp", callNow:"Call us", viewTours:"View tours",
     requestOffer:"Request a quote", contactUs:"Get in touch", allTours:"All tours & prices",
     from:"from", perBoat:"per boat / crew", perPerson:"per person", perPersonShort:"/ pers.", hours:"hrs", included:"Included", highlights:"Highlights",
@@ -211,23 +211,6 @@ const TOURS = [
       teaser:"Zadar's famous sunset (called the world's most beautiful by Hitchcock) – fully private from the water. 2 hours of relaxed cruising past the old town and islands, with a bottle of chilled Croatian sparkling wine & snacks. Just you, your company and the skipper.",
       inc:["A bottle of chilled Croatian sparkling wine & snacks 🥂","Experienced German-speaking skipper","The Sea Organ & „Greeting to the Sun\" from the water","Each additional hour only +100 €"],
       hi:["Fully private – just you & the skipper (up to 8)","Ideal for couples, proposals & special evenings","Departure from Marina Zadar"] }
-  },
-  {
-    id:"properson", media:"../assets/tour-lite-halb.jpg", slug:"touren", group:"charter", emoji:"👣",
-    perPerson:true, price:"55", minPax:3, durLabel:{de:"ab 2 Std.",hr:"od 2 h",en:"from 2 hrs"},
-    tag:{de:"Pro Person",hr:"Po osobi",en:"Per person"},
-    de:{ title:"Ausflug nach Wunsch – pro Person",
-      teaser:"Ihr wollt einfach ein paar Stunden aufs Meer, ohne gleich das ganze Boot zu buchen? Sagt uns Wunschdauer und -route – wir bestätigen, was machbar ist. Pro Person, ab 3 Personen, ab 2 Stunden.",
-      inc:["Erfahrener Skipper (Deutsch/Englisch)","Route & Dauer nach Absprache","Gekühlte Softdrinks an Bord","Treibstoff inklusive"],
-      hi:["Ideal für Einzelgäste, Paare & kleine Gruppen","Ab 2 Stunden – ihr bestimmt die Zeit","Wunsch mitteilen → Skipper bestätigt Machbarkeit"] },
-    hr:{ title:"Izlet po želji – po osobi",
-      teaser:"Želite samo nekoliko sati na moru bez najma cijelog broda? Recite nam željeno trajanje i rutu – potvrdimo što je izvedivo. Po osobi, od 3 osobe, od 2 sata.",
-      inc:["Iskusni skiper (njemački/engleski)","Ruta i trajanje po dogovoru","Hladni sokovi na brodu","Gorivo uključeno"],
-      hi:["Idealno za pojedince, parove i male grupe","Od 2 sata – vi određujete vrijeme","Recite želju → skiper potvrđuje izvedivost"] },
-    en:{ title:"Trip Your Way – Per Person",
-      teaser:"Just want a few hours at sea without booking the whole boat? Tell us your preferred time and route – we confirm what's possible. Per person, from 3 guests, from 2 hours.",
-      inc:["Experienced skipper (German/English)","Route & duration by arrangement","Chilled soft drinks on board","Fuel included"],
-      hi:["Ideal for solo guests, couples & small groups","From 2 hours – you set the time","Tell us your wish → skipper confirms feasibility"] }
   }
 ];
 
@@ -291,4 +274,110 @@ const PARTNERS = {
   ]
 };
 
-module.exports = { BRAND, PAGES, LANGS, LANG_LABEL, HTML_LANG, UI, TOURS, ADDONS, PARTNERS };
+// ---------- Touren pro Person (geteilte Gruppentouren, ab 3 Pers.) ----------
+const PPTOURS = [
+  {
+    id:"drei-insel", media:"../assets/gallery-1.jpg", price:"35",
+    tag:{de:"Beliebt",hr:"Popularno",en:"Popular"},
+    dur:{de:"3–4 Std.",hr:"3–4 h",en:"3–4 hrs"},
+    sub:{de:"Ošljak · Ugljan · Galevac",hr:"Ošljak · Ugljan · Galevac",en:"Ošljak · Ugljan · Galevac"},
+    de:{ title:"3-Insel-Tour", teaser:"Drei Inseln, versteckte Buchten, Schnorcheln und Baden im türkisen Wasser – der perfekte Mix aus Meer und Inselleben." },
+    hr:{ title:"Tura 3 otoka", teaser:"Tri otoka, skrivene uvale, ronjenje i kupanje u tirkiznom moru – savršen spoj mora i otočkog života." },
+    en:{ title:"3-Island Tour", teaser:"Three islands, hidden bays, snorkelling and swimming in turquoise water – the perfect mix of sea and island life." }
+  },
+  {
+    id:"sunset", media:"../assets/tour-charter.jpg", price:"29", gold:true,
+    tag:{de:"Sonnenuntergang",hr:"Zalazak sunca",en:"Sunset"},
+    dur:{de:"ca. 1,5 Std.",hr:"oko 1,5 h",en:"approx. 1.5 hrs"},
+    sub:{de:"Altstadt & Meeresorgel",hr:"Stari grad i Morske orgulje",en:"Old Town & Sea Organ"},
+    de:{ title:"Sonnenuntergang-Tour", teaser:"Der schönste Sonnenuntergang – vom Wasser aus. Mit einem Glas Sekt an Bord, vorbei an der beleuchteten Altstadt und der Meeresorgel." },
+    hr:{ title:"Tura u zalazak sunca", teaser:"Najljepši zalazak sunca – s mora. Uz čašu pjenušca na brodu, pokraj osvijetljenog Starog grada i Morskih orgulja." },
+    en:{ title:"Sunset Tour", teaser:"The most beautiful sunset – from the water. With a glass of sparkling wine on board, past the illuminated old town and the Sea Organ." }
+  },
+  {
+    id:"dugi-otok", media:"../assets/tour-island.jpg", price:"89", gold:true,
+    tag:{de:"Highlight",hr:"Vrhunac",en:"Highlight"},
+    dur:{de:"ganztägig, ~9 Std.",hr:"cijeli dan, ~9 h",en:"full day, ~9 hrs"},
+    sub:{de:"Sakarun · Höhle · Wrack · Tunnel",hr:"Sakarun · špilja · olupina · tunel",en:"Sakarun · cave · wreck · tunnel"},
+    de:{ title:"Dugi Otok – Ganztag", teaser:"Das große Abenteuer: Sakarun-Sandstrand, die Golubinka-Meereshöhle, Schnorcheln am Schiffswrack und die geheimen U-Boot-Tunnel." },
+    hr:{ title:"Dugi Otok – cijeli dan", teaser:"Velika avantura: pješčana plaža Sakarun, morska špilja Golubinka, ronjenje na olupini broda i tajni podmornički tuneli." },
+    en:{ title:"Dugi Otok – Full Day", teaser:"The big adventure: Sakarun sandy beach, the Golubinka sea cave, snorkelling at the shipwreck and the secret submarine tunnels." }
+  },
+  {
+    id:"sakarun", media:"../assets/tour-lite-tag.jpg", price:"72",
+    tag:{de:"Halbtag",hr:"Pola dana",en:"Half day"},
+    dur:{de:"ca. 4,5 Std.",hr:"oko 4,5 h",en:"approx. 4.5 hrs"},
+    sub:{de:"Lagune · Schnorcheln · Tunnel",hr:"Laguna · ronjenje · tunel",en:"Lagoon · snorkelling · tunnel"},
+    de:{ title:"Sakarun-Strand & Wrack", teaser:"Karibik-Feeling am Sakarun: türkise Lagune, feiner Sand, Schnorcheln am Wrack und ein Blick in die Tunnel aus dem Kalten Krieg." },
+    hr:{ title:"Plaža Sakarun i olupina", teaser:"Karipski ugođaj na Sakarunu: tirkizna laguna, fini pijesak, ronjenje na olupini i pogled u tunele iz Hladnog rata." },
+    en:{ title:"Sakarun Beach & Wreck", teaser:"Caribbean feeling at Sakarun: turquoise lagoon, fine sand, snorkelling at the wreck and a look into the Cold-War tunnels." }
+  },
+  {
+    id:"kornati", media:"../assets/gallery-3.jpg", price:"95", gold:true,
+    tag:{de:"Premium",hr:"Premium",en:"Premium"},
+    dur:{de:"ganztägig",hr:"cijeli dan",en:"full day"},
+    sub:{de:"Klippen & Naturwunder",hr:"Litice i čudo prirode",en:"Cliffs & natural wonder"},
+    note:{de:"zzgl. ~16 € Nationalpark-Gebühr",hr:"+ ~16 € ulaznica za park",en:"+ ~€16 national-park fee"},
+    de:{ title:"Kornati-Nationalpark", teaser:"140 Inseln, dramatische Klippen und kristallklares Wasser im Nationalpark Kornati – das Naturwunder der Adria, ganz für euch erlebt." },
+    hr:{ title:"Nacionalni park Kornati", teaser:"140 otoka, dramatične litice i kristalno čisto more u NP Kornati – čudo prirode Jadrana, doživljeno baš za vas." },
+    en:{ title:"Kornati National Park", teaser:"140 islands, dramatic cliffs and crystal-clear water in Kornati National Park – the Adriatic's natural wonder, all for you." }
+  },
+  {
+    id:"individuell", media:"../assets/tour-lite-halb.jpg", price:"55",
+    tag:{de:"Flexibel",hr:"Fleksibilno",en:"Flexible"},
+    dur:{de:"ab 2 Std.",hr:"od 2 h",en:"from 2 hrs"},
+    sub:{de:"Route & Dauer nach Wunsch",hr:"Ruta i trajanje po želji",en:"Route & duration your way"},
+    de:{ title:"Individueller Ausflug", teaser:"Ihr bestimmt Route und Dauer. Ideal für ein paar entspannte Stunden auf dem Meer – ganz nach euren Wünschen. Ab 3 Personen." },
+    hr:{ title:"Individualni izlet", teaser:"Vi određujete rutu i trajanje. Idealno za nekoliko opuštenih sati na moru – po vašoj želji. Od 3 osobe." },
+    en:{ title:"Bespoke Trip", teaser:"You decide the route and duration. Ideal for a few relaxed hours at sea – entirely your way. From 3 guests." }
+  }
+];
+
+// Highlight: Romantik-Sonnenuntergang für Pärchen (privat zu zweit)
+const PPHIGHLIGHT = {
+  media:"../assets/gallery-4.jpg", price:"149",
+  unit:{de:"für 2 Personen",hr:"za 2 osobe",en:"for 2 people"},
+  tag:{de:"Highlight für Pärchen",hr:"Vrhunac za parove",en:"Highlight for couples"},
+  de:{ title:"Romantik-Sonnenuntergang für Pärchen",
+    teaser:"Der schönste Sonnenuntergang von Zadar – ganz privat nur zu zweit. Anstoßen mit Champagner oder kroatischem Sekt und einem Aperol Spritz, während die Sonne über der Adria versinkt. Perfekt für Jahrestage, Heiratsanträge oder einfach einen unvergesslichen Abend.",
+    inc:["Flasche Champagner oder kroatischer Sekt 🍾","Aperol Spritz zum Anstoßen 🥂","Privat – nur ihr zwei & der Skipper","ca. 1,5–2 Std. entspanntes Cruisen zum Sonnenuntergang"] },
+  hr:{ title:"Romantični zalazak sunca za parove",
+    teaser:"Najljepši zadarski zalazak sunca – posve privatno, samo za dvoje. Nazdravite šampanjcem ili hrvatskim pjenušcem i Aperol Spritzom dok sunce tone u Jadran. Savršeno za godišnjice, prosidbe ili jednostavno nezaboravnu večer.",
+    inc:["Boca šampanjca ili hrvatskog pjenušca 🍾","Aperol Spritz za nazdravljanje 🥂","Privatno – samo vas dvoje i skiper","oko 1,5–2 h opuštene vožnje u zalazak sunca"] },
+  en:{ title:"Romantic Sunset for Couples",
+    teaser:"Zadar's most beautiful sunset – completely private, just the two of you. Toast with champagne or Croatian sparkling wine and an Aperol Spritz as the sun sinks into the Adriatic. Perfect for anniversaries, proposals or simply an unforgettable evening.",
+    inc:["A bottle of champagne or Croatian sparkling wine 🍾","Aperol Spritz to toast 🥂","Private – just the two of you & the skipper","approx. 1.5–2 hrs of relaxed sunset cruising"] }
+};
+
+// FAQ (trilingual) – wird auch als FAQPage-JSON-LD ausgegeben
+const PPFAQ = [
+  { de:{q:"Was ist im Preis pro Person enthalten?",a:"Deutschsprachiger Skipper & lokaler Guide, Kraftstoff und alle Gebühren, Sicherheits- und Schnorchelausrüstung, Trinkwasser sowie ein Willkommensgetränk. Ihr zahlt einfach pro Person – ohne das ganze Boot mieten zu müssen."},
+    hr:{q:"Što je uključeno u cijenu po osobi?",a:"Skiper koji govori njemački i lokalni vodič, gorivo i sve pristojbe, sigurnosna i ronilačka oprema, pitka voda te welcome piće. Plaćate jednostavno po osobi – bez najma cijelog broda."},
+    en:{q:"What is included in the price per person?",a:"A German-speaking skipper & local guide, fuel and all fees, safety and snorkelling equipment, drinking water and a welcome drink. You simply pay per person – without renting the whole boat."} },
+  { de:{q:"Ab wie vielen Personen fahrt ihr los?",a:"Wir starten ab 3 Personen. Bei weniger Gästen findet sich oft eine passende Gruppe – frag einfach nach dem nächsten möglichen Termin."},
+    hr:{q:"Od koliko osoba krećete?",a:"Krećemo od 3 osobe. Uz manje gostiju često se nađe odgovarajuća grupa – samo pitajte za sljedeći mogući termin."},
+    en:{q:"How many people do you need to set off?",a:"We depart from 3 people. With fewer guests a suitable group often comes together – just ask for the next possible date."} },
+  { de:{q:"Wie viele Gäste sind an Bord?",a:"Maximal 8 – also eine kleine, entspannte Gruppe. Keine anonyme Massenabfertigung wie auf den großen Ausflugsschiffen."},
+    hr:{q:"Koliko je gostiju na brodu?",a:"Najviše 8 – dakle mala, opuštena grupa. Bez anonimne masovne vožnje kao na velikim izletničkim brodovima."},
+    en:{q:"How many guests are on board?",a:"A maximum of 8 – a small, relaxed group. No anonymous mass handling like on the big tourist boats."} },
+  { de:{q:"Gibt es eine Toilette an Bord?",a:"Ja! Unsere Scarani Coral 30 hat eine echte Bord-Toilette und eine schattige Kabine – ein echter Komfortvorteil gegenüber offenen Schlauchbooten."},
+    hr:{q:"Ima li toalet na brodu?",a:"Da! Naš Scarani Coral 30 ima pravi brodski WC i sjenovitu kabinu – prava prednost u odnosu na otvorene gumenjake."},
+    en:{q:"Is there a toilet on board?",a:"Yes! Our Scarani Coral 30 has a real on-board WC and a shaded cabin – a genuine comfort advantage over open RIBs."} },
+  { de:{q:"Bekomme ich Getränke an Bord?",a:"Trinkwasser ist immer inklusive. Auf Wunsch gibt es Aperol Spritz, Limoncello, Champagner oder kroatischen Sekt an Bord – bitte einfach bei der Buchung vorab Bescheid geben, damit wir alles gut gekühlt bereitstellen."},
+    hr:{q:"Dobivam li piće na brodu?",a:"Pitka voda uvijek je uključena. Po želji nudimo Aperol Spritz, limoncello, šampanjac ili hrvatski pjenušac na brodu – javite nam unaprijed kod rezervacije kako bismo sve dobro ohladili."},
+    en:{q:"Do I get drinks on board?",a:"Drinking water is always included. On request there's Aperol Spritz, limoncello, champagne or Croatian sparkling wine on board – just let us know in advance when booking so we can chill everything."} },
+  { de:{q:"Kann ich auch das ganze Boot privat mieten?",a:"Klar – dann schau bei unseren „Touren“ zum Festpreis vorbei. Dort zahlt ihr einen Gesamtpreis fürs ganze Boot, egal wie viele ihr seid."},
+    hr:{q:"Mogu li unajmiti cijeli brod privatno?",a:"Naravno – pogledajte naše „Ture“ po fiksnoj cijeni. Ondje plaćate ukupnu cijenu za cijeli brod, bez obzira na broj osoba."},
+    en:{q:"Can I also rent the whole boat privately?",a:"Sure – have a look at our fixed-price “Tours”. There you pay one total price for the whole boat, no matter how many you are."} },
+  { de:{q:"Was passiert bei schlechtem Wetter?",a:"Wird die Tour wegen Wind (Jugo/Bura) oder Regen abgesagt, bekommt ihr 100 % zurück oder wir verschieben auf einen Sonnentag."},
+    hr:{q:"Što ako je loše vrijeme?",a:"Ako se tura otkaže zbog vjetra (jugo/bura) ili kiše, dobivate 100 % povrat ili je pomičemo na sunčani dan."},
+    en:{q:"What happens if the weather is bad?",a:"If the tour is cancelled due to wind (Jugo/Bura) or rain, you get 100 % back or we move it to a sunny day."} },
+  { de:{q:"Wo starten die Touren und muss ich schwimmen können?",a:"Start ist an der Marina Zadar (Details nach der Buchung). Schwimmen ist optional – Rettungswesten sind an Bord, du kannst die Tour also auch ohne Baden genießen."},
+    hr:{q:"Gdje počinju ture i moram li znati plivati?",a:"Polazak je iz marine Zadar (detalji nakon rezervacije). Plivanje je neobavezno – prsluci za spašavanje su na brodu, pa turu možete uživati i bez kupanja."},
+    en:{q:"Where do the tours start and do I need to swim?",a:"Departure is from Marina Zadar (details after booking). Swimming is optional – life jackets are on board, so you can enjoy the tour without going in the water."} }
+];
+
+// Echte Gäste-Bewertungen hier eintragen (Text + Name). Leer = nur Google-Score wird gezeigt.
+const PPREVIEWS = [];
+
+module.exports = { BRAND, PAGES, LANGS, LANG_LABEL, HTML_LANG, UI, TOURS, ADDONS, PARTNERS, PPTOURS, PPHIGHLIGHT, PPFAQ, PPREVIEWS };

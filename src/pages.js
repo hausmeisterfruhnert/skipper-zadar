@@ -161,7 +161,7 @@ exports.index = (ctx) => {
     }
   });
   const featured = TOURS[0], island = TOURS.find(z=>z.id==="dugi-otok");
-  const preview = ["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok","sunset","properson"].map(id=>TOURS.find(z=>z.id===id)).filter(Boolean);
+  const preview = ["tagestour-ai","halbtag-ai","tagestour-lite","dugi-otok","sunset","charter"].map(id=>TOURS.find(z=>z.id===id)).filter(Boolean);
   const body = `
   <section class="hero">
     ${ctx.BRAND.images.hero?`<img class="hero-bg" src="${ctx.BRAND.images.hero}" alt="${pick(l,{de:'Türkisblaues Meer und Küste bei Zadar, Kroatien',hr:'Tirkizno more i obala kod Zadra, Hrvatska',en:'Turquoise sea and coastline near Zadar, Croatia'})}" loading="lazy">`:''}
@@ -793,4 +793,239 @@ exports.agb = (ctx) => {
       <h3>7. Prices & services</h3><p>The fixed per-boat prices stated at the time of booking apply. Add-ons are charged separately.</p>`}
   });
   return legalShell(ctx, x.h1, x.lead, x.inner);
+};
+
+/* ---------------- TOUREN PRO PERSON ---------------- */
+exports["pro-person"] = (ctx) => {
+  const { l, t, BRAND, PPTOURS, PPHIGHLIGHT, PPFAQ, PPREVIEWS, wa, waMsg, IC, mapLink } = ctx;
+  const x = pick(l,{
+    de:{ eyebrow:"Einzeln mitfahren · Preis pro Person", h1:"Touren pro Person ab Zadar",
+      lead:"Du willst nicht das ganze Boot mieten? Komm einzeln an Bord unserer privaten Yacht – kleine Gruppe, deutschsprachiger Skipper und die schönsten Buchten rund um Zadar. Schon ab 3 Personen fahren wir los.",
+      badges:["👥 Kleine Gruppe · max. 8","🚻 Echtes WC an Bord","🇩🇪 Deutscher Skipper","★ 5,0 auf Google","☔ Wetter-Garantie"],
+      diff:"Lieber das ganze Boot nur für euch? Bei unseren <strong>privaten Touren</strong> zahlt ihr einen Festpreis fürs ganze Boot – egal ob ihr zu zweit oder zu acht seid.",
+      diffBtn:"Zu den privaten Touren →",
+      toursE:"Unsere Touren", toursH:"Wähle dein Abenteuer auf dem Meer",
+      toursP:"Sechs Touren – vom kurzen Sonnenuntergang bis zum großen Insel-Ganztag. Preis immer pro Person.",
+      priceNote:"Alle Preise pro Person · ab 3 Personen · faire Festpreise ohne versteckte Kosten",
+      book:"Details & Buchen", ab:"ab 3 Pers.",
+      hlE:"Unser Highlight", hlBtn:"Jetzt anfragen",
+      cmpE:"Warum bei uns?", cmpH:"Privat & persönlich statt Massenboot",
+      cmpP:"Der Unterschied, den ihr sofort spürt – schon ab dem ersten Meter auf dem Wasser.",
+      cmpUs:"Bei uns · Skipper Zadar", cmpThem:"Große Ausflugsboote",
+      cmp:[["Gruppengröße","Klein & privat · max. 8 Gäste","Große Boote · 12–50+ Gäste"],
+           ["Das Boot","Private Yacht mit Kabine & echtem WC","Offenes Boot, oft ohne Toilette"],
+           ["Skipper","Deutsch & Englisch, persönlich","Wechselnd, oft nur Englisch"],
+           ["Route","Flexibel – nach euren Wünschen","Fixer Massen-Ablauf"],
+           ["Getränke","Aperol, Sekt & Limoncello auf Wunsch","Standard, meist Aufpreis"],
+           ["Schlechtwetter","100 % zurück oder neuer Termin","Oft nur Gutschein"]],
+      guarE:"Unser Versprechen", guarH:"Damit ihr sorgenfrei bucht",
+      guar:[["☔","Wetter-Garantie","Sagt das Wetter die Tour ab, gibt's 100 % zurück oder einen neuen Sonnentag."],
+            ["💶","Feste Preise","Klarer Preis pro Person – keine versteckten Kosten, keine Überraschungen."],
+            ["🇩🇪","Deutscher Ansprechpartner","Persönlich erreichbar per WhatsApp, Telefon & E-Mail – vor und während der Tour."],
+            ["★","5,0 auf Google","Top bewertet von unseren Gästen – kleine Gruppe, echter Service."]],
+      revE:"Gäste über uns", revH:"Das sagen unsere Gäste", revScore:"Google-Bewertungen",
+      revLink:"Alle Bewertungen auf Google ansehen",
+      incH:"✅ Das ist dabei",
+      inc:["Deutschsprachiger Skipper & lokaler Guide","Kraftstoff & alle Gebühren","Sicherheitsausrüstung & Rettungswesten","Schnorchelausrüstung","Trinkwasser & 1 Willkommensgetränk","Echte Bord-Toilette & schattige Kabine"],
+      noH:"Optional / nicht dabei", no:["Mittagessen (Stopp im Inseldorf möglich)","Handtücher","Hotel-Transfer"],
+      knowH:"ℹ️ Gut zu wissen", know:["Treffpunkt: Marina Zadar (Details nach der Buchung)","Abfahrt ab 3 Personen · max. 8 Gäste","Schlechtwetter-Garantie: 100 % zurück oder neuer Termin","Sonnendeck mit Schattenmöglichkeit an Bord"],
+      bringH:"Was mitbringen", bring:["Badesachen & Handtuch","Sonnencreme & Sonnenhut","Kamera für die schönsten Momente"],
+      drinkH:"🥂 Getränke & Extras an Bord",
+      drinkP:"Auf Wunsch gibt es <strong>Aperol Spritz, Limoncello, Champagner oder kroatischen Sekt</strong> an Bord. Bitte einfach <strong>bei der Buchung vorab Bescheid geben</strong>, damit wir alles gut gekühlt für euch bereithalten.",
+      faqE:"FAQ", faqH:"Häufige Fragen", incL:"Inklusive:" },
+    hr:{ eyebrow:"Pridružite se pojedinačno · Cijena po osobi", h1:"Ture po osobi iz Zadra",
+      lead:"Ne želite unajmiti cijeli brod? Ukrcajte se pojedinačno na našu privatnu jahtu – mala grupa, skiper koji govori njemački i najljepše uvale oko Zadra. Krećemo već od 3 osobe.",
+      badges:["👥 Mala grupa · maks. 8","🚻 Pravi WC na brodu","🇩🇪 Njemački skiper","★ 5,0 na Googleu","☔ Jamstvo za vrijeme"],
+      diff:"Radije cijeli brod samo za vas? Kod naših <strong>privatnih tura</strong> plaćate fiksnu cijenu za cijeli brod – bez obzira jeste li dvoje ili osmero.",
+      diffBtn:"Na privatne ture →",
+      toursE:"Naše ture", toursH:"Odaberite svoju avanturu na moru",
+      toursP:"Šest tura – od kratkog zalaska sunca do velikog cjelodnevnog otočkog izleta. Cijena uvijek po osobi.",
+      priceNote:"Sve cijene po osobi · od 3 osobe · poštene fiksne cijene bez skrivenih troškova",
+      book:"Detalji i rezervacija", ab:"od 3 os.",
+      hlE:"Naš vrhunac", hlBtn:"Pošalji upit",
+      cmpE:"Zašto kod nas?", cmpH:"Privatno i osobno umjesto masovnog broda",
+      cmpP:"Razlika koju odmah osjetite – već od prvog metra na vodi.",
+      cmpUs:"Kod nas · Skipper Zadar", cmpThem:"Veliki izletnički brodovi",
+      cmp:[["Veličina grupe","Malo i privatno · maks. 8 gostiju","Veliki brodovi · 12–50+ gostiju"],
+           ["Brod","Privatna jahta s kabinom i pravim WC-om","Otvoreni brod, često bez WC-a"],
+           ["Skiper","Njemački i engleski, osobno","Promjenjiv, često samo engleski"],
+           ["Ruta","Fleksibilno – po vašoj želji","Fiksni masovni raspored"],
+           ["Pića","Aperol, pjenušac i limoncello po želji","Standard, uglavnom uz doplatu"],
+           ["Loše vrijeme","100 % povrat ili novi termin","Često samo vaučer"]],
+      guarE:"Naše obećanje", guarH:"Da rezervirate bez brige",
+      guar:[["☔","Jamstvo za vrijeme","Ako vrijeme otkaže turu, dobivate 100 % povrat ili novi sunčani dan."],
+            ["💶","Fiksne cijene","Jasna cijena po osobi – bez skrivenih troškova i iznenađenja."],
+            ["🇩🇪","Njemački kontakt","Osobno dostupni putem WhatsAppa, telefona i e-pošte – prije i tijekom ture."],
+            ["★","5,0 na Googleu","Vrhunski ocijenjeni od gostiju – mala grupa, prava usluga."]],
+      revE:"Gosti o nama", revH:"Što kažu naši gosti", revScore:"Google recenzije",
+      revLink:"Pogledaj sve recenzije na Googleu",
+      incH:"✅ Uključeno", inc:["Skiper koji govori njemački i lokalni vodič","Gorivo i sve pristojbe","Sigurnosna oprema i prsluci","Oprema za ronjenje","Pitka voda i welcome piće","Pravi brodski WC i sjenovita kabina"],
+      noH:"Opcionalno / nije uključeno", no:["Ručak (moguć stop u otočkom mjestu)","Ručnici","Transfer iz hotela"],
+      knowH:"ℹ️ Dobro je znati", know:["Polazak: marina Zadar (detalji nakon rezervacije)","Kreće od 3 osobe · maks. 8 gostiju","Jamstvo za loše vrijeme: 100 % povrat ili novi termin","Sunčana paluba sa sjenom na brodu"],
+      bringH:"Što ponijeti", bring:["Kupaći i ručnik","Krema za sunčanje i šešir","Fotoaparat za najljepše trenutke"],
+      drinkH:"🥂 Pića i dodaci na brodu",
+      drinkP:"Po želji nudimo <strong>Aperol Spritz, limoncello, šampanjac ili hrvatski pjenušac</strong> na brodu. Samo nam <strong>javite unaprijed kod rezervacije</strong> kako bismo sve dobro ohladili za vas.",
+      faqE:"FAQ", faqH:"Česta pitanja", incL:"Uključeno:" },
+    en:{ eyebrow:"Join individually · Price per person", h1:"Per-Person Boat Tours from Zadar",
+      lead:"Don't want to rent the whole boat? Come aboard our private yacht individually – small group, German-speaking skipper and the finest bays around Zadar. We set off from just 3 people.",
+      badges:["👥 Small group · max. 8","🚻 Real WC on board","🇩🇪 German skipper","★ 5.0 on Google","☔ Weather guarantee"],
+      diff:"Prefer the whole boat just for you? With our <strong>private tours</strong> you pay one fixed price for the whole boat – whether there are two of you or eight.",
+      diffBtn:"To the private tours →",
+      toursE:"Our tours", toursH:"Choose your adventure at sea",
+      toursP:"Six tours – from a short sunset to the big full-day island trip. Always priced per person.",
+      priceNote:"All prices per person · from 3 people · fair fixed prices with no hidden costs",
+      book:"Details & Book", ab:"from 3",
+      hlE:"Our highlight", hlBtn:"Enquire now",
+      cmpE:"Why us?", cmpH:"Private & personal instead of a mass boat",
+      cmpP:"The difference you feel instantly – from the very first metre on the water.",
+      cmpUs:"With us · Skipper Zadar", cmpThem:"Big tourist boats",
+      cmp:[["Group size","Small & private · max. 8 guests","Big boats · 12–50+ guests"],
+           ["The boat","Private yacht with cabin & real WC","Open boat, often without a toilet"],
+           ["Skipper","German & English, personal","Changing, often English only"],
+           ["Route","Flexible – to your wishes","Fixed mass schedule"],
+           ["Drinks","Aperol, sparkling wine & limoncello on request","Standard, usually extra"],
+           ["Bad weather","100 % back or a new date","Often just a voucher"]],
+      guarE:"Our promise", guarH:"So you book with peace of mind",
+      guar:[["☔","Weather guarantee","If the weather cancels the tour, you get 100 % back or a new sunny day."],
+            ["💶","Fixed prices","A clear price per person – no hidden costs, no surprises."],
+            ["🇩🇪","German contact","Personally reachable via WhatsApp, phone & e-mail – before and during the tour."],
+            ["★","5.0 on Google","Top-rated by our guests – small group, real service."]],
+      revE:"Guests about us", revH:"What our guests say", revScore:"Google reviews",
+      revLink:"See all reviews on Google",
+      incH:"✅ What's included", inc:["German-speaking skipper & local guide","Fuel & all fees","Safety equipment & life jackets","Snorkelling equipment","Drinking water & 1 welcome drink","Real on-board WC & shaded cabin"],
+      noH:"Optional / not included", no:["Lunch (island-village stop possible)","Towels","Hotel transfer"],
+      knowH:"ℹ️ Good to know", know:["Meeting point: Marina Zadar (details after booking)","Departs from 3 people · max. 8 guests","Bad-weather guarantee: 100 % back or a new date","Sun deck with shade on board"],
+      bringH:"What to bring", bring:["Swimwear & towel","Sunscreen & sun hat","Camera for the best moments"],
+      drinkH:"🥂 Drinks & extras on board",
+      drinkP:"On request there's <strong>Aperol Spritz, limoncello, champagne or Croatian sparkling wine</strong> on board. Just <strong>let us know in advance when booking</strong> so we can keep everything nicely chilled for you.",
+      faqE:"FAQ", faqH:"Frequently Asked Questions", incL:"Included:" }
+  });
+
+  const ppCard = (tr) => {
+    const d = tr[l];
+    const noteh = tr.note ? `<div class="pp-pn">${tr.note[l]}</div>` : '';
+    return `<article class="tour">
+      <div class="tour-media">
+        <span class="tour-tag${tr.gold?' gold':''}">${tr.tag[l]}</span>
+        <img class="tour-img" src="${tr.media}" alt="${d.title} – ${pick(l,{de:'Bootstour pro Person ab Zadar',hr:'izlet brodom po osobi iz Zadra',en:'per-person boat tour from Zadar'})}" loading="lazy">
+      </div>
+      <div class="tour-body">
+        <h3>${d.title}</h3>
+        <div class="pp-sub">${tr.sub[l]}</div>
+        <div class="tour-meta"><span>⏱️ ${tr.dur[l]}</span><span>👥 ${x.ab}</span></div>
+        <p>${d.teaser}</p>
+        <div class="tour-foot">
+          <div class="tour-price">${tr.price} €<small>${t.perPersonShort}</small>${noteh}</div>
+          <a class="btn btn-dark" href="buchung.html">${x.book}</a>
+        </div>
+      </div>
+    </article>`;
+  };
+
+  const hl = PPHIGHLIGHT, hd = hl[l];
+  const highlight = `
+  <section><div class="container">
+    <div class="pp-highlight">
+      <div class="pp-hl-media"><span class="tour-tag gold">${hl.tag[l]}</span><img src="${hl.media}" alt="${hd.title}" loading="lazy"></div>
+      <div class="pp-hl-body">
+        <span class="eyebrow">${x.hlE}</span>
+        <h2>${hd.title}</h2>
+        <p>${hd.teaser}</p>
+        <ul class="pp-lst">${hd.inc.map(i=>`<li>${i}</li>`).join("")}</ul>
+        <div class="pp-hl-foot">
+          <div class="tour-price">${hl.price} €<small>${hl.unit[l]}</small></div>
+          <a class="btn btn-primary" href="${wa(l,waMsg[l])}" target="_blank" rel="noopener">${IC.wa} ${x.hlBtn}</a>
+        </div>
+      </div>
+    </div>
+  </div></section>`;
+
+  const cmpRows = x.cmp.map(r=>`<tr><td class="ft">${r[0]}</td><td class="us">✓ ${r[1]}</td><td class="them">${r[2]}</td></tr>`).join("");
+  const guarCards = x.guar.map(g=>`<div class="pp-g"><div class="ic">${g[0]}</div><h3>${g[1]}</h3><p>${g[2]}</p></div>`).join("");
+
+  const revCards = (PPREVIEWS||[]).map(r=>`<div class="pp-rev"><div class="pp-stars">★★★★★</div><p>„${r.text}“</p><div class="pp-who">${r.flag||''} ${r.name}</div></div>`).join("");
+  const reviews = `
+  <section><div class="container">
+    <div class="center" style="margin-bottom:8px">
+      <span class="eyebrow">${x.revE}</span><h2>${x.revH}</h2>
+      <div style="margin:12px 0 22px"><a class="pp-gscore" href="${mapLink}" target="_blank" rel="noopener">★ <b>${BRAND.rating}</b> · ${x.revScore}</a></div>
+    </div>
+    ${revCards?`<div class="pp-revs">${revCards}</div>`:''}
+    <p class="center" style="margin-top:14px"><a href="${mapLink}" target="_blank" rel="noopener">${x.revLink} →</a></p>
+  </div></section>`;
+
+  const faqItems = PPFAQ.map(f=>`<details class="pp-faq"><summary>${f[l].q}</summary><div class="pp-faq-a">${f[l].a}</div></details>`).join("");
+  const faqLd = JSON.stringify({
+    "@context":"https://schema.org","@type":"FAQPage",
+    mainEntity: PPFAQ.map(f=>({ "@type":"Question", name:f[l].q, acceptedAnswer:{ "@type":"Answer", text:f[l].a } }))
+  });
+
+  const body = `
+  <section class="page-hero"><div class="container">
+    <div class="breadcrumb"><a href="index.html">${t.nav.index}</a> › ${t.nav["pro-person"]}</div>
+    <span class="eyebrow">${x.eyebrow}</span>
+    <h1>${x.h1}</h1>
+    <p class="lead">${x.lead}</p>
+    <div class="hero-badges">${x.badges.map(b=>`<span class="hero-badge">${b}</span>`).join("")}</div>
+  </div></section>
+
+  <section style="padding-bottom:0"><div class="container">
+    <div class="pp-diff">
+      <div class="sp">${x.diff}</div>
+      <a class="btn btn-dark" href="touren.html">${x.diffBtn}</a>
+    </div>
+  </div></section>
+
+  <section><div class="container">
+    <div class="center" style="max-width:640px;margin:0 auto 30px">
+      <span class="eyebrow">${x.toursE}</span><h2>${x.toursH}</h2><p class="lead">${x.toursP}</p>
+    </div>
+    <div class="grid grid-3">${PPTOURS.map(ppCard).join("")}</div>
+    <p class="center" style="color:var(--muted);font-size:.9rem;margin-top:20px">${x.priceNote}</p>
+  </div></section>
+
+  ${highlight}
+
+  <section class="section-sand"><div class="container">
+    <div class="center" style="max-width:660px;margin:0 auto 28px">
+      <span class="eyebrow">${x.cmpE}</span><h2>${x.cmpH}</h2><p class="lead">${x.cmpP}</p>
+    </div>
+    <table class="pp-cmp"><thead><tr><th>&nbsp;</th><th class="usc">${x.cmpUs}</th><th>${x.cmpThem}</th></tr></thead><tbody>${cmpRows}</tbody></table>
+  </div></section>
+
+  <section class="pp-deep"><div class="container">
+    <div class="center" style="max-width:640px;margin:0 auto 30px"><span class="eyebrow">${x.guarE}</span><h2>${x.guarH}</h2></div>
+    <div class="pp-guar">${guarCards}</div>
+  </div></section>
+
+  ${reviews}
+
+  <section class="section-sand"><div class="container">
+    <div class="center" style="max-width:620px;margin:0 auto 28px"><span class="eyebrow">${x.incH.replace('✅ ','')}</span><h2>${pick(l,{de:'Das ist dabei – und gut zu wissen',hr:'Uključeno – i dobro je znati',en:"What's included – and good to know"})}</h2></div>
+    <div class="grid grid-2" style="align-items:start">
+      <div class="card">
+        <h3 style="margin-top:0">${x.incH}</h3>
+        <ul class="pp-lst">${x.inc.map(i=>`<li>${i}</li>`).join("")}</ul>
+        <h3 style="margin-top:18px">${x.noH}</h3>
+        <ul class="pp-lst no">${x.no.map(i=>`<li>${i}</li>`).join("")}</ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">${x.knowH}</h3>
+        <ul class="pp-lst">${x.know.map(i=>`<li>${i}</li>`).join("")}</ul>
+        <h3 style="margin-top:18px">${x.bringH}</h3>
+        <ul class="pp-lst bring">${x.bring.map(i=>`<li>${i}</li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pp-drinks"><h3>${x.drinkH}</h3><p>${x.drinkP}</p></div>
+  </div></section>
+
+  <section><div class="container" style="max-width:820px">
+    <div class="center" style="margin-bottom:24px"><span class="eyebrow">${x.faqE}</span><h2>${x.faqH}</h2></div>
+    ${faqItems}
+  </div></section>
+
+  ${ctaBand(ctx)}
+  <script type="application/ld+json">${faqLd}</script>`;
+
+  return { title:x.h1, desc:x.lead.slice(0,155), body };
 };
