@@ -351,9 +351,9 @@ const PPHIGHLIGHT = {
 
 // FAQ (trilingual) – wird auch als FAQPage-JSON-LD ausgegeben
 const PPFAQ = [
-  { de:{q:"Was ist im Preis pro Person enthalten?",a:"Deutschsprachiger Skipper & lokaler Guide, Kraftstoff und alle Gebühren, Sicherheits- und Schnorchelausrüstung, Trinkwasser sowie ein Willkommensgetränk. Ihr zahlt einfach pro Person – ohne das ganze Boot mieten zu müssen."},
-    hr:{q:"Što je uključeno u cijenu po osobi?",a:"Skiper koji govori njemački i lokalni vodič, gorivo i sve pristojbe, sigurnosna i ronilačka oprema, pitka voda te welcome piće. Plaćate jednostavno po osobi – bez najma cijelog broda."},
-    en:{q:"What is included in the price per person?",a:"A German-speaking skipper & local guide, fuel and all fees, safety and snorkelling equipment, drinking water and a welcome drink. You simply pay per person – without renting the whole boat."} },
+  { de:{q:"Was ist im Preis pro Person enthalten?",a:"Deutschsprachiger Skipper & lokaler Guide, Kraftstoff und alle Gebühren, Sicherheitsausrüstung, Handtücher an Bord, Trinkwasser sowie ein Willkommensgetränk. Die Schnorchel-Ausrüstung bringt ihr bitte selbst mit. Ihr zahlt einfach pro Person – ohne das ganze Boot mieten zu müssen."},
+    hr:{q:"Što je uključeno u cijenu po osobi?",a:"Skiper koji govori njemački i lokalni vodič, gorivo i sve pristojbe, sigurnosna oprema, ručnici na brodu, pitka voda te welcome piće. Opremu za ronjenje molimo ponesite sami. Plaćate jednostavno po osobi – bez najma cijelog broda."},
+    en:{q:"What is included in the price per person?",a:"A German-speaking skipper & local guide, fuel and all fees, safety equipment, towels on board, drinking water and a welcome drink. Please bring your own snorkelling gear. You simply pay per person – without renting the whole boat."} },
   { de:{q:"Ab wie vielen Personen fahrt ihr los?",a:"Wir starten ab 3 Personen. Bei weniger Gästen findet sich oft eine passende Gruppe – frag einfach nach dem nächsten möglichen Termin."},
     hr:{q:"Od koliko osoba krećete?",a:"Krećemo od 3 osobe. Uz manje gostiju često se nađe odgovarajuća grupa – samo pitajte za sljedeći mogući termin."},
     en:{q:"How many people do you need to set off?",a:"We depart from 3 people. With fewer guests a suitable group often comes together – just ask for the next possible date."} },

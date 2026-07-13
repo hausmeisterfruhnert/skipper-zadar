@@ -34,7 +34,7 @@ er erscheint automatisch korrekt auf Deutsch, Kroatisch und Englisch.
 
 | Datei | Wofür zuständig | Wie oft brauchst du sie |
 |-------|-----------------|--------------------------|
-| `src/data.js` | Kontakt, **Preise**, Touren, Zusatzleistungen, Partner, Bildpfade | **am häufigsten** |
+| `src/data.js` | Kontakt, **Preise** (private & pro Person), Touren, Zusatzleistungen, Partner, **Bewertungen**, FAQ, Bildpfade | **am häufigsten** |
 | `src/pages.js` | Fließtexte der Seiten (Über uns, Boot, Kontakt …) | gelegentlich |
 | `assets/styles.css` | Farben, Schriftgrößen, Design | selten |
 | `assets/` (Ordner) | Fotos (`.jpg`, `.png`) | wenn du Bilder tauschst |
@@ -97,23 +97,44 @@ In `src/data.js`. Jede Tour hat eine Zeile mit `price:"…"`. Nur die **Zahl**
 id:"tagestour-ai", … hrs:8, price:"850",   →   price:"900",
 ```
 
-Zuordnung der Preise:
+Wichtig: Es gibt jetzt **zwei getrennte Tour-Bereiche** in `data.js`. Achte darauf,
+im richtigen Block zu sein (manche `id` kommen in beiden vor, z. B. `sunset`):
 
-| Tour / Leistung | erkennbar an | Preis |
-|-----------------|--------------|-------|
+**A) Private Touren (ganzes Boot) – im Block `TOURS`** (Seite „Touren")
+
+| Tour | erkennbar an | Preis |
+|------|--------------|-------|
 | Ganztagestour All-Inclusive | `id:"tagestour-ai"` | 850 € |
 | Halbtagestour All-Inclusive | `id:"halbtag-ai"` | 550 € |
 | Ganztag Lite | `id:"tagestour-lite"` | 700 € |
 | Halbtag Lite | `id:"halbtag-lite"` | 450 € |
 | Insel-Abenteuer Dugi Otok | `id:"dugi-otok"` | 850 € |
-| Sonnenuntergangstour | `id:"sunset"` | 200 € |
-| Ausflug pro Person | `id:"properson"` | 55 € |
+| Sonnenuntergang (privat) | `id:"sunset"` | 200 € |
+| Individuelle Charter | `id:"charter"` | auf Anfrage |
+
+**B) Touren pro Person – im Block `PPTOURS`** (Seite „Pro Person")
+
+| Tour | erkennbar an | Preis |
+|------|--------------|-------|
+| 3-Insel-Tour | `id:"drei-insel"` | 35 € |
+| Sonnenuntergang-Tour | `id:"sunset"` | 29 € |
+| Dugi Otok – Ganztag | `id:"dugi-otok"` | 89 € |
+| Sakarun-Strand & Wrack | `id:"sakarun"` | 72 € |
+| Kornati-Nationalpark | `id:"kornati"` | 95 € |
+| Individueller Ausflug | `id:"individuell"` | 55 € |
+| **Romantik-Sonnenuntergang (Pärchen)** | im Block `PPHIGHLIGHT` | 149 € |
+
+**C) Zusatzleistungen – im Block `ADDONS`**
+
+| Leistung | erkennbar an | Preis |
+|----------|--------------|-------|
 | Käse-/Antipasti-Platte | `emoji:"🧀"` | 80 € |
 | Prosecco / Sekt | `emoji:"🍾"` | 80 € |
 | Cocktails | `emoji:"🍹"` | 120 € |
 
 > Der eingebettete **Buchungskalender (Shore)** hat eigene Preise – die änderst du
-> direkt bei Shore. `data.js` steuert nur die **„Preise"-Seite**.
+> direkt bei Shore. `data.js` steuert die Preise auf der **„Preise"-Seite** und den
+> **Tour-Seiten**.
 
 ### 5.2 Kontaktdaten ändern
 
@@ -166,6 +187,33 @@ Anführungszeichen ändern.
 
 In `src/data.js` im Block `PARTNERS` (Unterkünfte, Seefahrtschule, Home Care).
 Am einfachsten: schick mir die Daten, dann baue ich den neuen Eintrag sauber ein.
+
+### 5.6 Bewertungen auf der Seite „Pro Person" einfügen
+
+In `src/data.js` gibt es den Block `PPREVIEWS`. Aktuell ist er leer (`[]`) – dann
+zeigt die Seite nur deinen Google-Score. Echte Google-Rezensionen trägst du so ein:
+
+```js
+const PPREVIEWS = [
+  { name:"Familie M. aus München", flag:"🇩🇪", text:"Ein absolut perfekter Tag auf dem Meer!" },
+  { name:"James, UK",              flag:"🇬🇧", text:"Best day of our Croatia trip." }
+];
+```
+
+Jede Zeile in den geschweiften Klammern `{ … }` ist eine Bewertung und erscheint
+als Zitat-Karte. `flag` ist optional (Länder-Fähnchen). Mehrere durch Komma trennen.
+
+### 5.7 Häufige Fragen (FAQ) ändern
+
+In `src/data.js` im Block `PPFAQ`. Jede Frage hat `q` (Frage) und `a` (Antwort),
+jeweils dreisprachig (`de` / `hr` / `en`). Nur den Text zwischen den
+Anführungszeichen ändern – Frage und Antwort in allen drei Sprachen anpassen.
+
+### 5.8 Preis des Pärchen-Sonnenuntergangs ändern
+
+Der Romantik-Sonnenuntergang steht **nicht** bei den normalen Touren, sondern im
+eigenen Block `PPHIGHLIGHT` in `src/data.js`. Preis dort in der Zeile
+`price:"149"` ändern.
 
 ---
 
