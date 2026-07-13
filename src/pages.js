@@ -280,7 +280,7 @@ exports.touren = (ctx) => {
             <ul class="includes" style="margin:12px 0">${d.inc.map(i=>`<li>${i}</li>`).join("")}</ul>
             <ul class="includes" style="margin:12px 0">${d.hi.map(i=>`<li style="--x:1">✦ ${i}</li>`).join("")}</ul>
           </details>
-          <div class="tour-foot">${tr.price?`<div class="tour-price">${ctx.money(tr.price)}<small>${tr.perPerson?t.perPerson:t.perBoat}</small></div>`:`<div class="tour-price">${t.onRequest}<small>&nbsp;</small></div>`}
+          <div class="tour-foot">${tr.price?`<div class="tour-price from">${t.from} ${ctx.money(tr.price)}<small>${tr.perPerson?t.perPerson:t.perBoat}</small></div>`:`<div class="tour-price">${t.onRequest}<small>&nbsp;</small></div>`}
           <a class="btn btn-dark" href="${tr.slug==='dugi-otok'?'dugi-otok.html':'buchung.html'}">${tr.slug==='dugi-otok'?t.details:t.bookThis}</a></div>
         </div></div>`;
       }).join("")}</div></div>`;
@@ -292,6 +292,7 @@ exports.touren = (ctx) => {
   </div></section>
   <section><div class="container">
     ${groups.map(section).join("")}
+    <div class="center" style="margin-top:38px"><a class="btn btn-outline btn-lg" href="preise.html">${t.toPriceList} →</a></div>
   </div></section>
   ${ctaBand(ctx)}`;
   return { title:x.h1, desc:x.lead.slice(0,155), body };
@@ -438,21 +439,29 @@ exports.boot = (ctx) => {
 
 /* ---------------- PREISE ---------------- */
 exports.preise = (ctx) => {
-  const { l, t, TOURS, ADDONS, money } = ctx;
+  const { l, t, TOURS, ADDONS, money, PPTOURS, PPHIGHLIGHT } = ctx;
   const x = pick(l,{
-    de:{h1:"Preise",lead:"Faire Festpreise pro Boot – ganz gleich, ob ihr zu zweit oder zu acht kommt. Keine versteckten Kosten.",
-      toursH:"Touren (pro Boot / Crew)",addH:"Zusatzleistungen",
+    de:{h1:"Preise",lead:"Faire Festpreise – pro Boot für private Touren oder pro Person für unsere geteilten Touren. Keine versteckten Kosten.",
+      toursH:"Private Touren (pro Boot / Crew)",ppH:"Touren pro Person (ab 3 Personen)",addH:"Zusatzleistungen",
       noteH:"Anzahlungs- & Wetter-Garantie",note:"Eure Anzahlung sichert Boot & Skipper. Wird die Tour wegen Wind (Jugo/Bura) oder Regen abgesagt, erhaltet ihr 100 % zurück oder wir verschieben auf einen Sonnentag.",
       per:"pro Boot"},
-    hr:{h1:"Cijene",lead:"Poštene fiksne cijene po brodu – bilo da vas je dvoje ili osmero. Bez skrivenih troškova.",
-      toursH:"Ture (po brodu / posadi)",addH:"Dodatne usluge",
+    hr:{h1:"Cijene",lead:"Poštene fiksne cijene – po brodu za privatne ture ili po osobi za naše zajedničke ture. Bez skrivenih troškova.",
+      toursH:"Privatne ture (po brodu / posadi)",ppH:"Ture po osobi (od 3 osobe)",addH:"Dodatne usluge",
       noteH:"Jamstvo za predujam i vrijeme",note:"Vaš predujam osigurava brod i skipera. Otkaže li se tura zbog vjetra (Jugo/Bura) ili kiše, dobivate 100 % povrat ili pomak na sunčani dan.",
       per:"po brodu"},
-    en:{h1:"Prices",lead:"Fair fixed prices per boat – whether there are two of you or eight. No hidden costs.",
-      toursH:"Tours (per boat / crew)",addH:"Add-ons",
+    en:{h1:"Prices",lead:"Fair fixed prices – per boat for private tours or per person for our shared tours. No hidden costs.",
+      toursH:"Private tours (per boat / crew)",ppH:"Tours per person (from 3 guests)",addH:"Add-ons",
       noteH:"Deposit & weather guarantee",note:"Your deposit secures the boat & skipper. If the tour is cancelled due to wind (Jugo/Bura) or rain, you get 100% back or we move to a sunny day.",
       per:"per boat"}
   });
+  const persW = l==='de'?'Pers.':l==='hr'?'os.':'guests';
+  const abW = l==='de'?'ab':l==='hr'?'od':'from';
+  const ppRow = (tr) => {
+    const desc = [tr.dur[l], `${abW} 3 ${persW}`].filter(Boolean).join(' · ');
+    const amt = `${money(tr.price)} <span style="font-size:.62em;font-weight:600;color:var(--muted)">${t.perPersonShort}</span>${tr.note?`<div style="font-size:.58em;font-weight:700;color:var(--gold);text-transform:none">${tr.note[l]}</div>`:''}`;
+    return `<div class="price-row"><div><div class="name">${tr[l].title}</div><div class="desc">${desc}</div></div><div class="amt">${amt}</div></div>`;
+  };
+  const hlRow = () => `<div class="price-row"><div><div class="name">${PPHIGHLIGHT[l].title}</div><div class="desc">${PPHIGHLIGHT.unit[l]}</div></div><div class="amt">${money(PPHIGHLIGHT.price)}</div></div>`;
   const row = (tr) => {const d=tr[l];
     const persW = l==='de'?'Pers.':l==='hr'?'os.':'guests';
     const dur = tr.hrs?tr.hrs+' '+t.hours:(tr.durLabel?tr.durLabel[l]:'');
@@ -467,9 +476,16 @@ exports.preise = (ctx) => {
     <h1>${x.h1}</h1><p class="lead">${x.lead}</p>
   </div></section>
   <section><div class="container split narrow" style="align-items:start">
-    <div class="price-wrap">
-      <div class="price-head"><h3>${x.toursH}</h3></div>
-      ${TOURS.map(row).join("")}
+    <div>
+      <div class="price-wrap">
+        <div class="price-head"><h3>${x.toursH}</h3></div>
+        ${TOURS.map(row).join("")}
+      </div>
+      <div class="price-wrap" style="margin-top:22px">
+        <div class="price-head"><h3>${x.ppH}</h3></div>
+        ${PPTOURS.map(ppRow).join("")}
+        ${hlRow()}
+      </div>
     </div>
     <div>
       <div class="price-wrap" style="margin-bottom:22px">
@@ -915,7 +931,7 @@ exports["pro-person"] = (ctx) => {
         <div class="tour-meta"><span>⏱️ ${tr.dur[l]}</span><span>👥 ${x.ab}</span></div>
         <p>${d.teaser}</p>
         <div class="tour-foot">
-          <div class="tour-price">${tr.price} €<small>${t.perPersonShort}</small>${noteh}</div>
+          <div class="tour-price from">${t.from} ${tr.price} €<small>${t.perPersonShort}</small>${noteh}</div>
           <a class="btn btn-dark" href="buchung.html">${x.book}</a>
         </div>
       </div>
@@ -982,6 +998,7 @@ exports["pro-person"] = (ctx) => {
     </div>
     <div class="grid grid-3">${PPTOURS.map(ppCard).join("")}</div>
     <p class="center" style="color:var(--muted);font-size:.9rem;margin-top:20px">${x.priceNote}</p>
+    <div class="center" style="margin-top:16px"><a class="btn btn-outline btn-lg" href="preise.html">${t.toPriceList} →</a></div>
   </div></section>
 
   ${highlight}

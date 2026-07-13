@@ -59,7 +59,7 @@ const UI = {
   de:{
     nav:{ index:"Start", touren:"Touren", "pro-person":"Pro Person", boot:"Das Boot", preise:"Preise", "ueber-uns":"Über uns", partner:"Partner", kontakt:"Kontakt" },
     book:"Jetzt buchen", whatsapp:"WhatsApp", callNow:"Anrufen", viewTours:"Touren ansehen",
-    requestOffer:"Angebot anfragen", contactUs:"Kontakt aufnehmen", allTours:"Alle Touren & Preise",
+    requestOffer:"Angebot anfragen", contactUs:"Kontakt aufnehmen", allTours:"Alle Touren & Preise", toPriceList:"Zur kompletten Preisliste",
     from:"ab", perBoat:"pro Boot / Crew", perPerson:"pro Person", perPersonShort:"/ Pers.", hours:"Std.", included:"Inklusive", highlights:"Highlights",
     details:"Details & Buchung", bookThis:"Diese Tour buchen", onRequest:"auf Anfrage",
     footTagline:"Private Bootstouren & Bootsvermietung mit deutschem Skipper ab Zadar.",
@@ -72,7 +72,7 @@ const UI = {
   hr:{
     nav:{ index:"Početna", touren:"Ture", "pro-person":"Po osobi", boot:"Brod", preise:"Cijene", "ueber-uns":"O nama", partner:"Partneri", kontakt:"Kontakt" },
     book:"Rezerviraj", whatsapp:"WhatsApp", callNow:"Nazovi", viewTours:"Pogledaj ture",
-    requestOffer:"Zatraži ponudu", contactUs:"Kontaktirajte nas", allTours:"Sve ture i cijene",
+    requestOffer:"Zatraži ponudu", contactUs:"Kontaktirajte nas", allTours:"Sve ture i cijene", toPriceList:"Cijeli cjenik",
     from:"od", perBoat:"po brodu / posadi", perPerson:"po osobi", perPersonShort:"/ os.", hours:"h", included:"Uključeno", highlights:"Vrhunci",
     details:"Detalji i rezervacija", bookThis:"Rezerviraj ovu turu", onRequest:"na upit",
     footTagline:"Privatni izleti brodom i najam broda s njemačkim skiperom iz Zadra.",
@@ -85,7 +85,7 @@ const UI = {
   en:{
     nav:{ index:"Home", touren:"Tours", "pro-person":"Per Person", boot:"The Boat", preise:"Prices", "ueber-uns":"About", partner:"Partners", kontakt:"Contact" },
     book:"Book now", whatsapp:"WhatsApp", callNow:"Call us", viewTours:"View tours",
-    requestOffer:"Request a quote", contactUs:"Get in touch", allTours:"All tours & prices",
+    requestOffer:"Request a quote", contactUs:"Get in touch", allTours:"All tours & prices", toPriceList:"See the full price list",
     from:"from", perBoat:"per boat / crew", perPerson:"per person", perPersonShort:"/ pers.", hours:"hrs", included:"Included", highlights:"Highlights",
     details:"Details & booking", bookThis:"Book this tour", onRequest:"on request",
     footTagline:"Private boat tours & boat rental with a German-speaking skipper from Zadar.",
