@@ -198,7 +198,7 @@ const TOURS = [
   },
   {
     id:"sunset", media:"../assets/tour-charter.jpg", slug:"touren", group:"charter", emoji:"🌅",
-    hrs:2, price:"200", tag:{de:"Sonnenuntergang",hr:"Zalazak sunca",en:"Sunset"}, gold:true,
+    hrs:2, price:"150", tag:{de:"Sonnenuntergang",hr:"Zalazak sunca",en:"Sunset"}, gold:true,
     de:{ title:"Sonnenuntergangstour – privat",
       teaser:"Der berühmte Sonnenuntergang von Zadar (laut Hitchcock der schönste der Welt) – ganz privat vom Meer aus. 2 Stunden entspanntes Cruisen vor Altstadt und Inseln, mit einer Flasche gekühltem kroatischem Schaumwein & Knabbereien. Nur ihr, eure Begleitung und der Skipper.",
       inc:["Flasche gekühlter kroatischer Schaumwein (Pjenušac) & Knabbereien 🥂","Erfahrener deutscher Skipper","Meeresorgel & „Gruß an die Sonne\" vom Wasser aus","Jede weitere Stunde nur +100 €"],
