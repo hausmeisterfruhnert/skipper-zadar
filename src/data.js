@@ -101,7 +101,7 @@ const UI = {
 // group: ai = All-Inclusive, lite = Lite, island = Insel, charter = Charter
 const TOURS = [
   {
-    id:"tagestour-ai", media:"../assets/tour-ai-tag.jpg", slug:"touren", group:"ai", emoji:"🛥️", hrs:8, price:"850",
+    id:"tagestour-ai", media:"../assets/tour-ai-tag.jpg", slug:"touren", group:"ai", emoji:"🛥️", hrs:8, price:"650",
     tag:{de:"Bestseller",hr:"Najprodavanije",en:"Bestseller"}, gold:true,
     de:{ title:"Exklusive Ganztagestour – All-Inclusive",
       teaser:"Privater Ganztag auf der Scarani Coral 30 – nur eure Crew, versteckte Buchten rund um Zadar & Ugljan, Welcome-Drink und Getränke inklusive.",
@@ -117,7 +117,7 @@ const TOURS = [
       hi:["Up to 8 guests, fully private","Large sun deck, cabin, on-board WC & swim platform","Start 9:00 am Marina Zadar (flexible)"] }
   },
   {
-    id:"halbtag-ai", media:"../assets/tour-ai-halb.jpg", slug:"touren", group:"ai", emoji:"⚓", hrs:4, price:"550",
+    id:"halbtag-ai", media:"../assets/tour-ai-halb.jpg", slug:"touren", group:"ai", emoji:"⚓", hrs:4, price:"350",
     tag:{de:"Halbtag",hr:"Pola dana",en:"Half day"},
     de:{ title:"Exklusive Halbtagestour – All-Inclusive",
       teaser:"4 Stunden pure Entspannung: die schönsten Buchten um Zadar, Ošljak & Ugljan – privat mit Welcome-Drink & Getränken an Bord.",
@@ -133,7 +133,7 @@ const TOURS = [
       hi:["Morning or golden afternoon sun","Snorkelling stops in hidden coves","Up to 8 guests, fully private"] }
   },
   {
-    id:"tagestour-lite", media:"../assets/tour-lite-tag.jpg", slug:"touren", group:"lite", emoji:"☀️", hrs:8, price:"700",
+    id:"tagestour-lite", media:"../assets/tour-lite-tag.jpg", slug:"touren", group:"lite", emoji:"☀️", hrs:8, price:"500",
     tag:{de:"Lite",hr:"Lite",en:"Lite"},
     de:{ title:"Ganztagestour LITE",
       teaser:"Das volle Yacht-Erlebnis zum Sparpreis: privater Ganztag mit gekühlten Softdrinks & Säften an Bord. Alkoholische Wunschgetränke auf Absprache.",
@@ -149,7 +149,7 @@ const TOURS = [
       hi:["Up to 8 guests, private","Sun deck, cabin, on-board WC, swim platform","Best value for the whole day"] }
   },
   {
-    id:"halbtag-lite", media:"../assets/tour-lite-halb.jpg", slug:"touren", group:"lite", emoji:"🌊", hrs:4, price:"450",
+    id:"halbtag-lite", media:"../assets/tour-lite-halb.jpg", slug:"touren", group:"lite", emoji:"🌊", hrs:4, price:"350",
     tag:{de:"Lite",hr:"Lite",en:"Lite"},
     de:{ title:"Halbtagestour LITE",
       teaser:"Die Freiheit der Coral 30 zum Aktionspreis – 4 Stunden privat mit gekühlten Softdrinks. Ideal für den spontanen Ausflug.",
@@ -165,7 +165,7 @@ const TOURS = [
       hi:["Crystal-clear water, hidden coves","Up to 8 guests, private","Unbeatable entry price"] }
   },
   {
-    id:"dugi-otok", media:"../assets/tour-island.jpg", slug:"dugi-otok", group:"island", emoji:"🏝️", hrs:8, price:"850",
+    id:"dugi-otok", media:"../assets/tour-island.jpg", slug:"dugi-otok", group:"island", emoji:"🏝️", hrs:8, price:"650",
     tag:{de:"Insel-Abenteuer",hr:"Otočna avantura",en:"Island adventure"}, gold:true,
     de:{ title:"Dugi Otok & Sakarun – Das ultimative Insel-Abenteuer",
       teaser:"Schiffswrack, Meereshöhle, „Drachenauge“, die blaue Lagune, der Traumstrand Sakarun und geheime U-Boot-Bunker – der spektakulärste Ganztagesausflug ab Zadar, mit dem Komfort einer echten Yacht statt engem Schlauchboot.",
